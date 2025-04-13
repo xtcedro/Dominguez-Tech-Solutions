@@ -5,20 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Empowering Oklahoma City with revolutionary AI governance systems and web tech solutions for small businesses and entrepreneurs." />
   <meta name="author" content="Pedro Dominguez" />
-  <title>Dominguez Tech Solutions | AI Governance + Web Development for OKC</title>
+  <title id="site-title">Dominguez Tech Solutions | AI Governance + Web Development for OKC</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <script type="module" src="assets/js/script.js"></script>
-  <script src="assets/js/theme-toggle.js"></script>
+  <script type="module" src="assets/js/theme-toggle.js"></script>
 </head>
 <body>
   <!-- Navigation -->
   <nav class="navbar"></nav>
 
-
   <!-- Hero Section -->
   <section class="hero">
-    <img src="assets/images/banner.png" alt="Dominguez Tech Banner" class="hero-banner" />
-    <h1>Empowering OKC Through AI + Web Innovation ⚡</h1>
+    <img id="banner-image" src="assets/images/banner.png" alt="Dominguez Tech Banner" class="hero-banner" />
+    <h1 id="hero-headline">Empowering OKC Through AI + Web Innovation ⚡</h1>
     <p>We build modern systems for entrepreneurs, small businesses, and governments—fast, affordable, and powerful.</p>
     <p><strong>We've developed a revolutionary AI production system</strong> that enables local businesses to become self-sufficient, digitally empowered, and scalable. This isn't just tech—it's the future of economic independence.</p>
     <a href="appointment-booker.html" class="cta-button">Free Consultation for OKC Businesses 🗓️</a>
@@ -71,12 +70,29 @@
   <section class="contact-info">
     <h2>📍 Dominguez Tech Solutions — Based in OKC</h2>
     <ul>
-      <li>Email: <a href="mailto:domingueztechsolutions@gmail.com">domingueztechsolutions@gmail.com</a></li>
-      <li>Phone(text only): <a href="tel:+15399015819">(539) 901-5819</a></li>
+      <li>Email: <a href="#" id="contact-email">loading...</a></li>
+      <li>Phone (text only): <span id="business-phone">loading...</span></li>
     </ul>
   </section>
 
   <!-- Footer -->
   <footer id="footer"></footer>
+
+  <!-- Dynamic Data Injection -->
+  <script>
+    fetch('/api/settings?site=domtech')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('site-title').textContent = data.site_title;
+        document.getElementById('hero-headline').textContent = data.site_title;
+        document.getElementById('contact-email').textContent = data.contact_email;
+        document.getElementById('contact-email').href = `mailto:${data.contact_email}`;
+        document.getElementById('business-phone').textContent = data.business_phone;
+        document.getElementById('banner-image').src = data.homepage_banner;
+      })
+      .catch(err => {
+        console.error("Failed to load site settings:", err.message);
+      });
+  </script>
 </body>
 </html>
