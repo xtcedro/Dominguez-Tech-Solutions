@@ -196,3 +196,43 @@ li {
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
 }
 
+/* ===========================
+   Responsive - Tablet View
+   (min-width: 600px)
+=========================== */
+@media (max-width: 900px) {
+  .contact-info {
+    padding: 1.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-info li {
+    font-size: 1rem;
+  }
+}
+
+/* ===========================
+   Responsive - Smartphone View
+   (max-width: 599px)
+=========================== */
+@media (max-width: 599px) {
+  .contact-info {
+    padding: 1.5rem 0.75rem;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .contact-info ul {
+    padding-left: 1rem;
+  }
+
+  .contact-info li {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .contact-info a {
+    display: inline-block;
+    word-break: break-word;
+  }
+}
