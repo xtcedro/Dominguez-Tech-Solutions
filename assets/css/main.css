@@ -157,3 +157,67 @@ li {
   text-align: center;
 }
 
+/* ===========================================
+   Contact Information Section - Dominguez Tech Solutions
+   Polished for Business, Municipal, and Enterprise Use
+=========================================== */
+
+.contact-info {
+  background: linear-gradient(135deg, #0e1c33, #182e4a);
+  border-top: 3px solid #ffd700;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: #eaeaea;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 -4px 15px rgba(255, 215, 0, 0.08);
+}
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-info li {
+  margin: 0.75rem 0;
+  font-size: 1.05rem;
+}
+
+.contact-info a {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #fff7d1;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* Responsive Typography Enhancements */
+@media (min-width: 600px) {
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+
+  h2 {
+    font-size: 2.1rem;
+  }
+
+  .contact-info li {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 900px) {
+  body {
+    font-size: 1.15rem;
+  }
+
+  .cta-button {
+    font-size: 1.1rem;
+    padding: 0.9rem 1.8rem;
+  }
+}
