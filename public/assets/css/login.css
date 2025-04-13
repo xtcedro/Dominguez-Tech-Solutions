@@ -1,0 +1,124 @@
+/* =========================================
+   Dominguez Tech Solutions - Login Styling
+========================================= */
+
+/* Section Container */
+.login-section {
+  background-color: #0b1120;
+  padding: 4rem 1.5rem;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Login Box */
+.login-container {
+  background-color: #111c30;
+  border: 2px solid rgba(255, 215, 0, 0.15);
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.1);
+  text-align: center;
+}
+
+/* Title and Subtext */
+.login-title {
+  color: gold;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.login-subtext {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+}
+
+/* Login Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.login-form .form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.login-form label {
+  color: gold;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form input[type="email"] {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  background-color: #192841;
+  color: #f4f4f4;
+  transition: box-shadow 0.3s ease;
+}
+
+.login-form input::placeholder {
+  color: #aab1c0;
+}
+
+.login-form input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.4);
+}
+
+/* Submit Button */
+.login-form button[type="submit"] {
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: gold;
+  color: #0b1120;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.login-form button[type="submit"]:hover {
+  background-color: #ffe066;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px gold;
+}
+
+/* Response Message */
+#loginMessage {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #ffd700;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .login-container {
+    padding: 2rem 1.2rem;
+  }
+
+  .login-title {
+    font-size: 1.6rem;
+  }
+
+  .login-form button[type="submit"] {
+    font-size: 0.95rem;
+    padding: 0.65rem;
+  }
+}
