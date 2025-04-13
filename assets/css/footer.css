@@ -1,0 +1,73 @@
+/* 🌟 Premium Footer Styling */
+footer {
+  background: #0a1a2f; /* Dark Blue Background */
+  color: #ffd700; /* Luxurious Gold Text */
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  border-top: 4px solid #ffd700; /* Elegant Gold Top Border */
+  box-shadow: 0 -6px 15px rgba(255, 215, 0, 0.3);
+  position: relative;
+  font-weight: 600;
+}
+
+/* 🔹 Footer Text */
+footer p {
+  margin-bottom: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+  transition: transform 0.3s ease;
+}
+
+footer p:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700;
+}
+
+/* 🔗 Legal & Footer Links */
+.legal-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 0.8rem;
+}
+
+/* 🌍 Legal Links Styling */
+.legal-links a {
+  color: #ffd700; /* Gold text */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  font-size: 1.05rem;
+  transition: all 0.3s ease-in-out;
+}
+
+/* ✨ Hover Effect for Links */
+.legal-links a:hover {
+  color: #0a1a2f; /* Deep contrast on hover */
+  background: #ffd700;
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 12px #ffd700, 0 0 22px #ffd700;
+  transform: scale(1.12);
+}
+
+/* 🎨 Responsive Enhancements */
+@media (max-width: 768px) {
+  .legal-links {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  footer {
+    padding: 1.8rem;
+  }
+
+  .legal-links a {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
