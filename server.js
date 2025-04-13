@@ -8,7 +8,7 @@ import stripeRoutes from "./routes/stripeRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import settingsRoutes from "./routes/settingsRoutes.js";
-import blogRoutes from "./routes/blogRoutes.js";
+import blogsRoutes from "./routes/blogsRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -48,7 +48,7 @@ console.log("➡️ Dashboard routes loaded at /api/dashboard");
 app.use("/api/settings", settingsRoutes);
 console.log("➡️ Settings routes loaded at /api/settings");
 
-app.use("/api/blogs", blogRoutes);
+app.use("/api/blogs", blogsRoutes);
 console.log("➡️ Blogs routes loaded at /api/blogs");
 
 app.listen(port, () => {
