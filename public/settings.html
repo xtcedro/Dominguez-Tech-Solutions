@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Site Settings | Dominguez Tech Solutions</title>
+  <meta name="description" content="Update and manage Dominguez Tech Solutions site configuration settings." />
+  <meta name="author" content="Pedro Dominguez" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script type="module" src="assets/js/script.js"></script>
+  <script type="module" src="assets/js/theme-toggle.js"></script>
+</head>
+<body>
+  <nav class="navbar"></nav>
+
+  <section class="settings-section">
+    <h1 class="settings-title">⚙️ Site Settings Management</h1>
+    <p class="settings-subtext">Update your site's title, contact info, and homepage banner image path.</p>
+
+    <form id="settingsForm" class="settings-form">
+      <div class="form-group">
+        <label for="siteTitle">🧾 Site Title</label>
+        <input type="text" id="siteTitle" name="siteTitle" required placeholder="Enter the site title" />
+      </div>
+
+      <div class="form-group">
+        <label for="contactEmail">📧 Contact Email</label>
+        <input type="email" id="contactEmail" name="contactEmail" required placeholder="example@domain.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="businessPhone">📞 Business Phone</label>
+        <input type="tel" id="businessPhone" name="businessPhone" required placeholder="(555) 555-5555" />
+      </div>
+
+      <div class="form-group">
+        <label for="homepageBanner">🖼️ Homepage Banner Path</label>
+        <input type="text" id="homepageBanner" name="homepageBanner" required placeholder="e.g. assets/images/banner.png" />
+      </div>
+
+      <button type="submit" class="form-button">💾 Save Settings</button>
+      <div id="settingsMessage" class="settings-message"></div>
+    </form>
+  </section>
+
+  <footer id="footer"></footer>
+
+  <script type="module">
+    document.addEventListener("DOMContentLoaded", async () => {
+      const form = document.getElementById("settingsForm");
+      const message = document.getElementById("settingsMessage");
+      const siteKey = "domtech";
+
+      // Fetch current settings
+      try {
+        const res = await fetch(`/api/settings?site=${siteKey}`);
+        const data = await res.json();
+        if (res.ok) {
+          form.siteTitle.value = data.site_title || "";
+          form.contactEmail.value = data.contact_email || "";
+          form.businessPhone.value = data.business_phone || "";
+          form.homepageBanner.value = data.homepage_banner || "";
+        } else {
+          message.textContent = `⚠️ ${data.error}`;
+        }
+      } catch (err) {
+        message.textContent = "⚠️ Failed to load settings.";
+        console.error(err);
+      }
+
+      // Handle form submission
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const payload = {
+          siteTitle: form.siteTitle.value,
+          contactEmail: form.contactEmail.value,
+          businessPhone: form.businessPhone.value,
+          homepageBanner: form.homepageBanner.value
+        };
+
+        try {
+          const res = await fetch(`/api/settings?site=${siteKey}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          const result = await res.json();
+          if (res.ok) {
+            message.textContent = "✅ Settings updated successfully!";
+          } else {
+            message.textContent = `❌ ${result.error}`;
+          }
+        } catch (err) {
+          message.textContent = "❌ Server error. Please try again.";
+          console.error(err);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
