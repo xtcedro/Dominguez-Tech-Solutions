@@ -130,3 +130,45 @@
     padding: 2rem 1rem;
   }
 }
+
+.founder-photo {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.founder-photo h2 {
+  font-size: 2rem;
+  color: gold;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 6px gold;
+}
+
+.photo-frame {
+  display: inline-block;
+  padding: 12px;
+  background: radial-gradient(circle at center, #ffd700, #e6c200);
+  border-radius: 50%;
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3),
+              inset 0 0 20px rgba(255, 215, 0, 0.4);
+  transition: transform 0.4s ease;
+}
+
+.photo-frame:hover {
+  transform: scale(1.05);
+}
+
+.founder-img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #0a1a2f;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.caption {
+  margin-top: 1rem;
+  color: #e0e0e0;
+  font-weight: bold;
+  font-size: 1rem;
+}
