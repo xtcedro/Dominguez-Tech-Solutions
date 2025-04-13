@@ -1,16 +1,40 @@
-/* ==========================
+/* ===============================
+   Base Theme Variables
+================================== */
+:root {
+  --bg-color: #0b0c10;
+  --text-color: #ffffff;
+  --accent-color: #ffd700;
+  --primary-color: #0077cc;
+  --section-bg: #1f2833;
+  --btn-hover: #ffc107;
+  --icon: "🌙";
+}
+
+body.light-mode {
+  --bg-color: #f9f9f9;
+  --text-color: #121212;
+  --accent-color: #0077cc;
+  --primary-color: #ffd700;
+  --section-bg: #ffffff;
+  --btn-hover: #0077cc;
+  --icon: "☀️";
+}
+
+/* ===============================
    Global Styles
-   ========================== */
+================================== */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0b0c10;
-  color: #ffffff;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.6;
+  transition: background-color 0.4s, color 0.4s;
 }
 
 a {
-  color: #ffd700;
+  color: var(--accent-color);
   text-decoration: none;
 }
 
@@ -18,103 +42,82 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ==========================
-   Keyframe Animations
-   ========================== */
-@keyframes glowPulse {
-  0% {
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2),
-                0 0 25px rgba(255, 215, 0, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5),
-                0 0 50px rgba(255, 215, 0, 0.2);
-  }
-  100% {
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2),
-                0 0 25px rgba(255, 215, 0, 0.1);
-  }
-}
-
-/* ==========================
+/* ===============================
    Hero Section
-   ========================== */
+================================== */
 .hero {
-  background: linear-gradient(to right, #061428, #0b1d3a);
+  background-color: var(--section-bg);
   text-align: center;
-  padding: 5rem 1rem;
-  color: #ffffff;
-  border-radius: 8px;
-  animation: glowPulse 4s ease-in-out infinite;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+  padding: 4rem 1rem;
+  animation: glowPulse 6s ease-in-out infinite;
 }
 
 .hero-banner {
   max-width: 100%;
   height: auto;
-  margin-bottom: 1.5rem;
-  border-radius: 10px;
-  animation: glowPulse 5s ease-in-out infinite;
+  margin-bottom: 1rem;
+  border-radius: 12px;
 }
 
 .hero h1 {
-  font-size: 2.8rem;
+  font-size: 2.75rem;
   margin-bottom: 1rem;
-  color: #ffd700;
-  text-shadow: 1px 1px 2px #000;
+  color: var(--primary-color);
+  font-weight: bold;
 }
 
 .hero p {
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
-  color: #e0e0e0;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-inline: auto;
 }
 
-/* ==========================
-   Call to Action Button
-   ========================== */
-.cta-button, .btn {
-  background-color: #ffd700;
-  color: #061428;
+/* ===============================
+   Button Styles
+================================== */
+.cta-button,
+.btn {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
   padding: 0.75rem 1.75rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 1rem;
-  font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  animation: glowPulse 6s ease-in-out infinite;
+  transition: background-color 0.3s ease;
 }
 
-.cta-button:hover, .btn:hover {
-  background-color: #ffc107;
-  transform: scale(1.05);
+.cta-button:hover,
+.btn:hover {
+  background-color: var(--btn-hover);
+  color: var(--text-color);
 }
 
-/* ==========================
-   Sections
-   ========================== */
+/* ===============================
+   Section Styles
+================================== */
 section {
   padding: 3rem 1rem;
-  max-width: 1000px;
+  max-width: 960px;
   margin: auto;
 }
 
 section h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #ffd700;
+  color: var(--primary-color);
 }
 
 section ul {
   list-style: none;
-  padding: 0;
+  padding-left: 1rem;
 }
 
 section ul li {
-  padding-left: 1.5rem;
   margin-bottom: 0.5rem;
   position: relative;
+  padding-left: 1.5rem;
 }
 
 section ul li::before {
@@ -123,24 +126,23 @@ section ul li::before {
   left: 0;
 }
 
-/* ==========================
+/* ===============================
    Testimonials
-   ========================== */
+================================== */
 .testimonials blockquote {
-  border-left: 5px solid #ffd700;
+  border-left: 5px solid var(--accent-color);
   padding-left: 1rem;
   margin: 1.5rem 0;
   font-style: italic;
-  color: #cccccc;
+  color: #c5c6c7;
 }
 
-/* ==========================
+/* ===============================
    Contact Info
-   ========================== */
+================================== */
 .contact-info ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding-left: 0;
 }
 
 .contact-info li {
@@ -148,9 +150,42 @@ section ul li::before {
   font-size: 1rem;
 }
 
-/* ==========================
-   Responsive
-   ========================== */
+/* ===============================
+   Light/Dark Mode Toggle
+================================== */
+.theme-toggle-wrapper {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 999;
+}
+
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.2rem;
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.toggle-switch .icon::before {
+  content: var(--icon);
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+body.light-mode .toggle-switch .icon::before {
+  transform: rotate(360deg);
+}
+
+/* ===============================
+   Responsive Design
+================================== */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2rem;
@@ -158,5 +193,26 @@ section ul li::before {
 
   section h2 {
     font-size: 1.6rem;
+  }
+
+  .cta-button,
+  .btn {
+    width: 100%;
+    display: block;
+  }
+}
+
+/* ===============================
+   Hero Animation
+================================== */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 119, 204, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 119, 204, 0.1);
   }
 }
