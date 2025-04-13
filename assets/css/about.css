@@ -1,0 +1,132 @@
+/* About Page - Dominguez Tech Solutions */
+
+.about-intro,
+.solopreneur-story,
+.vision,
+.cta {
+  padding: 3rem 1.5rem;
+  max-width: 960px;
+  margin: auto;
+  color: #f8f9fa;
+  background-color: #0a1a2f;
+  border-left: 5px solid gold;
+  border-radius: 10px;
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.15);
+  margin-bottom: 2.5rem;
+}
+
+.about-intro h2,
+.solopreneur-story h2,
+.vision h2,
+.cta h2 {
+  font-size: 2rem;
+  color: gold;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.about-intro p,
+.solopreneur-story p,
+.vision p,
+.cta p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #e0e0e0;
+}
+
+/* Founder Photo */
+.founder-photo {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.founder-photo h2 {
+  font-size: 2rem;
+  color: gold;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 4px gold;
+}
+
+.photo-frame {
+  display: inline-block;
+  padding: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, gold 40%, #bfa800 100%);
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4), inset 0 0 20px rgba(255, 215, 0, 0.5);
+  transition: transform 0.5s ease;
+}
+
+.photo-frame:hover {
+  transform: scale(1.05) rotateY(5deg);
+}
+
+.founder-img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #0a1a2f;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.caption {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #ffffffb3;
+  font-size: 1rem;
+}
+
+/* Vision List */
+.vision ul {
+  list-style-type: "✅ ";
+  padding-left: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.vision ul li {
+  margin-bottom: 0.75rem;
+  color: #f5f5f5;
+  line-height: 1.6;
+}
+
+/* CTA */
+.cta {
+  text-align: center;
+  background-color: #112244;
+  border-color: #ffd700;
+}
+
+.cta-button {
+  margin-top: 1.5rem;
+  background: gold;
+  color: #0a1a2f;
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.cta-button:hover {
+  background: #ffda44;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .founder-img {
+    width: 160px;
+    height: 160px;
+  }
+
+  .about-intro,
+  .solopreneur-story,
+  .vision,
+  .cta {
+    padding: 2rem 1rem;
+  }
+}
