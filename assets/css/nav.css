@@ -1,7 +1,13 @@
 /* nav.css - Dominguez Tech Solutions Navigation */
 
+/* Sticky + Glassmorphism Navbar */
 .navbar {
-  background: #0a1a2f;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 26, 47, 0.7); /* glass effect background */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: gold;
   padding: 1rem 2rem;
   display: flex;
@@ -11,6 +17,7 @@
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
 }
 
+/* Left side of navbar */
 .nav-left {
   display: flex;
   align-items: center;
@@ -30,17 +37,21 @@
   cursor: pointer;
 }
 
+/* Sidebar Menu Container */
 .menu-container {
   position: relative;
 }
 
+/* Glass Sidebar with Slide Effect */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 250px;
-  background: #111b2e;
+  background: rgba(17, 27, 46, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   color: gold;
   padding: 1rem;
   box-shadow: 3px 0 10px rgba(255, 215, 0, 0.2);
@@ -53,6 +64,7 @@
   transform: translateX(0);
 }
 
+/* Sidebar Header */
 .sidebar-header {
   display: flex;
   justify-content: space-between;
@@ -73,6 +85,7 @@
   cursor: pointer;
 }
 
+/* Sidebar Links */
 .nav-links {
   list-style: none;
   padding: 0;
@@ -99,6 +112,7 @@
   padding-left: 0.5rem;
 }
 
+/* Admin Button */
 .nav-button {
   display: inline-block;
   margin-top: 1.5rem;
@@ -117,6 +131,7 @@
   background-color: #ffd700;
 }
 
+/* Overlay for Sidebar */
 .overlay {
   position: fixed;
   top: 0;
@@ -132,12 +147,12 @@
   display: block;
 }
 
-/* Disable scrolling when menu is open */
+/* Prevent Scroll When Sidebar Is Open */
 body.no-scroll {
   overflow: hidden;
 }
 
-/* Responsive */
+/* Mobile Tweaks */
 @media (max-width: 768px) {
   .nav-title {
     font-size: 1rem;
