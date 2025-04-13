@@ -196,28 +196,3 @@ li {
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
 }
 
-/* Responsive Typography Enhancements */
-@media (min-width: 600px) {
-  .hero h1 {
-    font-size: 2.6rem;
-  }
-
-  h2 {
-    font-size: 2.1rem;
-  }
-
-  .contact-info li {
-    font-size: 1.1rem;
-  }
-}
-
-@media (min-width: 900px) {
-  body {
-    font-size: 1.15rem;
-  }
-
-  .cta-button {
-    font-size: 1.1rem;
-    padding: 0.9rem 1.8rem;
-  }
-}
