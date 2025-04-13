@@ -2,8 +2,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
   const loginMessage = document.getElementById("loginMessage");
 
-  // Change this depending on the site you're on
-  const siteKey = "domtech"; // or "heavenlyroofing", "domtech"
+  // Auto-redirect if already logged in
+  const token = localStorage.getItem("adminToken");
+  if (token) {
+    window.location.href = "admin-dashboard.html";
+    return;
+  }
+
+  // Define the site key depending on which site is using this login
+  const siteKey = "domtech"; // or "heavenlyroofing", etc.
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
