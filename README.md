@@ -1,3 +1,3 @@
 # Dominguez-Tech-Solutions
-A full stack application designed to democratize technolog and artificial
+A full stack application designed to democratize technology and artificial
 intelligence.
