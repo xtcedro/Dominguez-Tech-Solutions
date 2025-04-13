@@ -1,2 +1,3 @@
 # Dominguez-Tech-Solutions
-The frontend of the web application Dominguez Tech Solutions. 
+A full stack application designed to democratize technolog and artificial
+intelligence.
