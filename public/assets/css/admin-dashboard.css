@@ -95,3 +95,91 @@
     width: 100%;
   }
 }
+
+/* ============================================
+   Dashboard Overview Styling - DominguezTechSolutions
+============================================ */
+
+/* Dashboard Wrapper */
+.dashboard-overview {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #0b1120;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.12);
+  color: #f5f5f5;
+}
+
+/* Welcome Message */
+.dashboard-welcome {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: gold;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+/* Section Headings */
+.dashboard-section h2 {
+  font-size: 1.4rem;
+  color: gold;
+  margin-bottom: 1rem;
+  border-left: 4px solid gold;
+  padding-left: 0.75rem;
+}
+
+/* Section List */
+.dashboard-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard-section li {
+  background-color: #162338;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+  border-left: 4px solid gold;
+}
+
+.dashboard-section li:hover {
+  background-color: #1f2f49;
+  transform: scale(1.01);
+}
+
+/* Dashboard Links */
+.dashboard-section a {
+  color: gold;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.05rem;
+  display: inline-block;
+  width: 100%;
+}
+
+.dashboard-section a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-overview {
+    padding: 1.5rem;
+  }
+
+  .dashboard-welcome {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-section h2 {
+    font-size: 1.25rem;
+  }
+
+  .dashboard-section a {
+    font-size: 1rem;
+  }
+}
