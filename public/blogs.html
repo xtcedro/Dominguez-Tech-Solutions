@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Read our latest blog posts and updates from Dominguez Tech Solutions." />
+  <title>Blog - Dominguez Tech Solutions</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Font Awesome (optional for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <!-- JS -->
+  <script type="module" src="assets/js/script.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar"></nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>📰 Our Blog</h1>
+    <p>Stay up to date with the latest from <strong>Dominguez Tech Solutions</strong>.</p>
+  </section>
+
+  <!-- Blog List -->
+  <section class="blog-list" style="max-width: 800px; margin: auto; padding: 2rem;">
+    <div id="blogContainer">Loading blog posts...</div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer"></footer>
+
+  <!-- Blog Fetch Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const container = document.getElementById("blogContainer");
+      container.innerHTML = "Loading...";
+
+      try {
+        const res = await fetch("/api/blogs");
+        const blogs = await res.json();
+
+        if (!Array.isArray(blogs) || blogs.length === 0) {
+          container.innerHTML = "<p>No blog posts found.</p>";
+          return;
+        }
+
+        container.innerHTML = ""; // Clear loading text
+
+        blogs.forEach(blog => {
+          const post = document.createElement("article");
+          post.style = `
+            background: #0a0f1f;
+            color: #fff;
+            border-left: 5px solid gold;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+          `;
+
+          post.innerHTML = `
+            <h2 style="color: gold;">${blog.title}</h2>
+            <p style="font-weight: bold;">by ${blog.author} &middot; <span style="font-size: 0.9rem;">${new Date(blog.created_at).toLocaleDateString()}</span></p>
+            <p style="margin-top: 1rem;">${blog.summary}</p>
+            <details style="margin-top: 1rem;">
+              <summary style="cursor: pointer; color: #ffd700;">Read Full Post</summary>
+              <div style="margin-top: 1rem;">${blog.content}</div>
+            </details>
+          `;
+
+          container.appendChild(post);
+        });
+      } catch (err) {
+        console.error("Blog fetch error:", err);
+        container.innerHTML = "<p style='color:red;'>⚠️ Failed to load blog posts.</p>";
+      }
+    });
+  </script>
+</body>
+</html>
