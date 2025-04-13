@@ -1,125 +1,138 @@
-/* ================================
-   About Sections Styling
-   Dominguez Tech Solutions
-================================= */
+/* ===============================================
+   About Section Styling - Dominguez Tech Solutions
+   Elevating AI Governance + Tech Infrastructure
+=============================================== */
 
-/* General Section Styling */
+/* General Container Styling */
 .about-intro,
 .founder-photo,
 .solopreneur-story,
 .vision,
 .cta {
-  padding: 3rem 1.5rem;
-  max-width: 900px;
-  margin: 0 auto;
-  background-color: #0b0f1c;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+  padding: 3.5rem 2rem;
+  max-width: 960px;
+  margin: 0 auto 2.5rem auto;
+  background: linear-gradient(145deg, #0c111f, #0a0e1a);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.12);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease-in-out;
 }
 
-/* Section Headings */
+/* Section Headers */
 .about-intro h2,
 .founder-photo h2,
 .solopreneur-story h2,
 .vision h2,
 .cta h2 {
   color: #ffd700;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  font-size: 2.25rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
 }
 
-/* Paragraph Styling */
+/* Text Content */
 .about-intro p,
 .solopreneur-story p,
 .vision p,
 .cta p {
-  font-size: 1.1rem;
-  color: #e6e6e6;
-  line-height: 1.8;
-  margin-bottom: 1rem;
+  font-size: 1.15rem;
+  color: #d4d4d4;
+  line-height: 1.9;
+  margin-bottom: 1.2rem;
+  font-weight: 400;
 }
 
+/* Vision Bullet List */
 .vision ul {
   list-style: none;
-  padding-left: 1rem;
-  margin-bottom: 1.5rem;
+  padding-left: 1.2rem;
+  margin-bottom: 1.8rem;
 }
 
 .vision ul li {
   position: relative;
-  padding-left: 1.8rem;
-  margin-bottom: 0.75rem;
-  color: #e6e6e6;
+  padding-left: 2rem;
+  margin-bottom: 0.9rem;
+  color: #eaeaea;
+  font-size: 1.1rem;
 }
 
 .vision ul li::before {
-  content: "✔️";
+  content: "★";
   position: absolute;
   left: 0;
   color: gold;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
-/* Founder Photo Section */
+/* Founder Portrait */
 .founder-photo .photo-frame {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .founder-photo .founder-img {
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   border: 5px solid gold;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6),
-              0 0 40px rgba(255, 215, 0, 0.3);
+  box-shadow:
+    0 0 25px rgba(255, 215, 0, 0.6),
+    0 0 45px rgba(255, 215, 0, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.08);
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .founder-photo .founder-img:hover {
-  transform: scale(1.05);
+  transform: scale(1.07);
+  box-shadow:
+    0 0 30px rgba(255, 215, 0, 0.8),
+    0 0 60px rgba(255, 215, 0, 0.4);
 }
 
 .founder-photo .caption {
-  margin-top: 0.8rem;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
 }
 
-/* CTA Button */
+/* Call to Action Button */
 .cta .cta-button {
-  background-color: gold;
+  background: linear-gradient(to right, gold, #f5c400);
   color: #0b0f1c;
-  padding: 0.8rem 1.5rem;
-  font-weight: bold;
-  font-size: 1.1rem;
+  padding: 1rem 2rem;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  display: inline-block;
-  margin-top: 1.2rem;
-  transition: all 0.3s ease;
+  border-radius: 10px;
+  font-size: 1.15rem;
+  font-weight: bold;
   text-decoration: none;
+  display: inline-block;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
 }
 
 .cta .cta-button:hover {
-  background-color: #ffe066;
+  background: gold;
   transform: scale(1.05);
-  box-shadow: 0 0 12px gold;
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.6);
 }
 
-/* Responsive */
+/* Responsive Layout */
 @media (max-width: 768px) {
   .founder-photo .founder-img {
-    width: 140px;
-    height: 140px;
+    width: 150px;
+    height: 150px;
   }
 
   .about-intro h2,
@@ -132,6 +145,6 @@
 
   .cta .cta-button {
     font-size: 1rem;
-    padding: 0.6rem 1.2rem;
+    padding: 0.75rem 1.5rem;
   }
 }
