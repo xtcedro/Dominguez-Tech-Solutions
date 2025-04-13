@@ -9,4 +9,5 @@ document.addEventListener('DOMContentLoaded', () => {
   loadFooter();
   setupNavigation();
   initializeChatbot();
+  fetchAppointments();
 });
