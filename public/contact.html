@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Dominguez Tech Solutions – Your trusted AI governance and digital transformation partner in Oklahoma City and beyond." />
+  <meta name="author" content="Pedro Dominguez" />
+  <title>Contact | Dominguez Tech Solutions</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script type="module" src="assets/js/script.js"></script>
+  <script type="module" src="assets/js/contact-settings.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar"></nav>
+
+  <!-- Contact Hero -->
+  <section class="hero">
+    <h1>Contact Dominguez Tech Solutions 📬</h1>
+    <p>We’re ready to help local businesses, entrepreneurs, and public institutions build bold futures with AI and automation.</p>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact-form-section">
+    <h2>Send Us a Message 📨</h2>
+    <form action="/api/contact" method="POST" class="contact-form">
+      <div class="form-group">
+        <label for="name">👤 Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">📧 Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">📞 Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="(optional)" />
+      </div>
+      <div class="form-group">
+        <label for="message">📝 Your Message</label>
+        <textarea id="message" name="message" rows="6" placeholder="Tell us how we can help..." required></textarea>
+      </div>
+      <button type="submit" class="cta-button">Submit Inquiry</button>
+    </form>
+  </section>
+
+  <!-- Contact Info (Populated by JS) -->
+  <section class="contact-info">
+    <h2>📍 Reach Us Directly</h2>
+    <ul id="contact-data">
+      <li>Loading contact details...</li>
+    </ul>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Ready to Launch Your Project?</h2>
+    <p>Let’s turn your vision into a high-impact digital experience. We work with individuals, businesses, and governments nationwide.</p>
+    <a href="appointment-booker.html" class="cta-button">Book a Strategy Call 🗓️</a>
+  </section>
+
+  <footer id="footer"></footer>
+</body>
+</html>
