@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     contactSection.innerHTML = `
       <li>Email: <a href="mailto:${data.contact_email}">${data.contact_email}</a></li>
       <li>Phone (text only): <a href="tel:${data.business_phone}">${data.business_phone}</a></li>
-      <li>Location: Oklahoma City, OK/li>
+      <li>Location: Oklahoma City, OK</li>
     `;
   } catch (err) {
     console.error("Error fetching contact settings:", err);
