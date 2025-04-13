@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Chatbot | Dominguez Tech Solutions</title>
+  <meta name="description" content="Interact with our intelligent chatbot built using HOPS AI Execution to support OKC businesses and beyond." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/chatbot.css" />
+  <script type="module" src="assets/js/script.js"></script>
+  <script type="module" src="assets/js/theme-toggle.js"></script>
+  <script type="module">
+    import { initializeChatbot } from './assets/js/chatbot.js';
+    window.addEventListener("DOMContentLoaded", initializeChatbot);
+  </script>
+</head>
+<body>
+  <nav class="navbar"></nav>
+
+  <section class="chatbot-container">
+    <h1 class="chatbot-title">Talk to Our AI Assistant 🤖</h1>
+    <p class="chatbot-subtext">Powered by HOPS AI Execution — Available 24/7 to support your business, tech, and consultation needs.</p>
+
+    <div id="chat-box" class="chat-box"></div>
+
+    <div class="chat-input-container">
+      <input
+        type="text"
+        id="user-input"
+        placeholder="Type your question here..."
+        autocomplete="off"
+      />
+      <button id="send-btn" aria-label="Send message">➤</button>
+    </div>
+  </section>
+
+  <footer id="footer"></footer>
+</body>
+</html>
