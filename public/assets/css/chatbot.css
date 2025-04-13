@@ -1,77 +1,87 @@
-/* =====================================
-   Chatbot Interface - DominguezTechSolutions
-===================================== */
+/* ==========================================
+   Premium Chatbot Interface - DominguezTechSolutions
+========================================== */
 
 .chatbot-container {
-  background-color: #0b1120;
-  color: #f4f4f4;
-  padding: 3rem 1.5rem;
-  max-width: 800px;
+  background-color: #0a1225;
+  color: #f8f9fa;
+  padding: 3.5rem 2rem;
+  max-width: 850px;
   margin: 0 auto;
-  border-radius: 12px;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.2);
   text-align: center;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .chatbot-title {
-  color: gold;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+  color: #ffd700;
+  font-size: 2.4rem;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  font-weight: 700;
 }
 
 .chatbot-subtext {
-  font-size: 1.1rem;
-  color: #d0d0d0;
-  margin-bottom: 2rem;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  color: #cfcfcf;
+  margin-bottom: 2.2rem;
+  line-height: 1.75;
+  font-weight: 400;
 }
 
 .chat-box {
-  background-color: #111c30;
-  border: 2px solid rgba(255, 215, 0, 0.2);
-  border-radius: 12px;
+  background-color: #101e36;
+  border: 2px solid rgba(255, 215, 0, 0.25);
+  border-radius: 14px;
   padding: 1rem;
-  height: 300px;
+  height: 360px;
   overflow-y: auto;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   font-family: 'Segoe UI', Tahoma, sans-serif;
+  box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.08);
+  scrollbar-width: thin;
+  scrollbar-color: #ffd700 #0a1225;
 }
 
 .chat-box .user-message,
 .chat-box .bot-message {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   text-align: left;
 }
 
 .user-message .user-label,
 .bot-message .bot-label {
-  font-weight: bold;
-  margin-bottom: 0.25rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #ffd700;
 }
 
 .user-message .user-text {
-  background-color: #1f2a45;
+  background-color: #1e2d4c;
   color: #ffffff;
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1.1rem;
   border-radius: 10px;
+  font-size: 1rem;
 }
 
 .bot-message .bot-text {
-  background-color: #1a273d;
-  color: gold;
-  padding: 0.75rem 1rem;
+  background-color: #182a46;
+  color: #ffe066;
+  padding: 0.85rem 1.1rem;
   border-radius: 10px;
+  font-size: 1rem;
 }
 
 .chat-input-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0d1528;
-  border-radius: 8px;
-  border: 2px solid rgba(255, 215, 0, 0.15);
-  padding: 0.5rem;
+  background-color: #0f1a31;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 215, 0, 0.18);
+  padding: 0.6rem 0.75rem;
 }
 
 #user-input {
@@ -79,58 +89,64 @@
   padding: 0.75rem;
   font-size: 1rem;
   border: none;
-  border-radius: 6px;
-  background-color: #192841;
-  color: #f4f4f4;
+  border-radius: 8px;
+  background-color: #1a2d4f;
+  color: #f8f9fa;
+  outline: none;
+  transition: background 0.3s ease;
 }
 
 #user-input::placeholder {
-  color: #aaaaaa;
+  color: #b3b3b3;
 }
 
 .send-btn {
-  background-color: gold;
-  color: #0b1120;
+  background-color: #ffd700;
+  color: #0a1225;
   border: none;
-  font-size: 1.2rem;
-  padding: 0.65rem 1rem;
-  margin-left: 0.75rem;
-  border-radius: 6px;
+  font-size: 1.3rem;
+  padding: 0.7rem 1.1rem;
+  margin-left: 0.85rem;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 700;
   transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
 }
 
 .send-btn:hover {
-  background-color: #ffe066;
-  box-shadow: 0 0 12px gold;
-  transform: scale(1.05);
+  background-color: #ffe76c;
+  box-shadow: 0 0 14px #ffd700;
+  transform: scale(1.06);
 }
 
 .chatbot-disclaimer {
-  font-size: 0.9rem;
-  margin-top: 1.5rem;
-  color: #b0b0b0;
+  font-size: 0.95rem;
+  margin-top: 1.8rem;
+  color: #bbbbbb;
+  font-style: italic;
 }
 
 .chatbot-disclaimer a {
-  color: gold;
+  color: #ffd700;
   text-decoration: underline;
   font-weight: bold;
 }
 
+/* Responsive Enhancements */
 @media (max-width: 768px) {
   .chatbot-container {
-    padding: 2rem 1rem;
+    padding: 2.5rem 1rem;
   }
 
   .chatbot-title {
-    font-size: 1.6rem;
+    font-size: 1.85rem;
   }
 
   .chat-input-container {
     flex-direction: column;
     align-items: stretch;
+    padding: 0.75rem;
   }
 
   #user-input {
