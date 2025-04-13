@@ -1,5 +1,6 @@
-/* main.css */
-
+/* ==========================
+   Global Styles
+   ========================== */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -9,7 +10,7 @@ body {
 }
 
 a {
-  color: #00b7ff;
+  color: #ffd700;
   text-decoration: none;
 }
 
@@ -17,64 +18,92 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Navbar Placeholder */
-.navbar {
-  background-color: #1f2833;
-  padding: 1rem;
-  text-align: center;
-  font-weight: bold;
+/* ==========================
+   Keyframe Animations
+   ========================== */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2),
+                0 0 25px rgba(255, 215, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5),
+                0 0 50px rgba(255, 215, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2),
+                0 0 25px rgba(255, 215, 0, 0.1);
+  }
 }
 
-/* Hero Section */
+/* ==========================
+   Hero Section
+   ========================== */
 .hero {
-  background-color: #1f2833;
+  background: linear-gradient(to right, #061428, #0b1d3a);
   text-align: center;
-  padding: 4rem 1rem;
+  padding: 5rem 1rem;
+  color: #ffffff;
+  border-radius: 8px;
+  animation: glowPulse 4s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
 .hero-banner {
   max-width: 100%;
   height: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  animation: glowPulse 5s ease-in-out infinite;
 }
 
 .hero h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   margin-bottom: 1rem;
-  color: #66fcf1;
+  color: #ffd700;
+  text-shadow: 1px 1px 2px #000;
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin-bottom: 1.5rem;
+  color: #e0e0e0;
 }
 
-.cta-button {
-  background-color: #45a29e;
-  color: white;
-  padding: 0.75rem 1.5rem;
+/* ==========================
+   Call to Action Button
+   ========================== */
+.cta-button, .btn {
+  background-color: #ffd700;
+  color: #061428;
+  padding: 0.75rem 1.75rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease-in-out;
+  animation: glowPulse 6s ease-in-out infinite;
 }
 
-.cta-button:hover {
-  background-color: #66fcf1;
+.cta-button:hover, .btn:hover {
+  background-color: #ffc107;
+  transform: scale(1.05);
 }
 
-/* Sections */
+/* ==========================
+   Sections
+   ========================== */
 section {
   padding: 3rem 1rem;
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
 }
 
 section h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #66fcf1;
+  color: #ffd700;
 }
 
 section ul {
@@ -94,16 +123,20 @@ section ul li::before {
   left: 0;
 }
 
-/* Testimonials */
+/* ==========================
+   Testimonials
+   ========================== */
 .testimonials blockquote {
-  border-left: 5px solid #66fcf1;
+  border-left: 5px solid #ffd700;
   padding-left: 1rem;
   margin: 1.5rem 0;
   font-style: italic;
-  color: #c5c6c7;
+  color: #cccccc;
 }
 
-/* Contact Info */
+/* ==========================
+   Contact Info
+   ========================== */
 .contact-info ul {
   list-style: none;
   padding: 0;
@@ -115,16 +148,9 @@ section ul li::before {
   font-size: 1rem;
 }
 
-/* Footer */
-footer {
-  background-color: #1f2833;
-  padding: 2rem 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #c5c6c7;
-}
-
-/* Responsive */
+/* ==========================
+   Responsive
+   ========================== */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2rem;
