@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book a free consultation or service with Dominguez Tech Solutions – empowering OKC through AI, automation, and modern web systems." />
+  <meta name="author" content="Pedro Dominguez" />
+  <title>Book Appointment | Dominguez Tech Solutions</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script type="module" src="assets/js/script.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar"></nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Book Your Consultation or Service 🗓️</h1>
+    <p>Let’s build something powerful together. Tell us a little about your project or service needs below.</p>
+  </section>
+
+  <!-- Appointment Form -->
+  <section class="appointment-booker">
+    <form id="appointmentForm" action="/api/appointments" method="POST" class="appointment-form">
+      <div class="form-group">
+        <label for="name">👤 Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">📞 Your Phone</label>
+        <input type="tel" id="phone" name="phone" placeholder="10-digit phone number" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">📧 Your Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+      </div>
+
+      <div class="form-group">
+        <label for="service">🛠️ Choose a Service</label>
+        <select id="service" name="service" required>
+          <option value="" disabled selected>🔽 Select a service</option>
+          <option value="crash-course">📚 AI & Web Dev Crash Course ($69)</option>
+          <option value="computer-repair">💻 Computer & Mobile Repair</option>
+          <option value="web-app">🌐 Custom Web Application Development</option>
+          <option value="it-consultation">🧑‍💻 IT or AI Consultation</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">📝 Additional Details</label>
+        <textarea id="message" name="message" rows="4" placeholder="Tell us more about what you need..."></textarea>
+      </div>
+
+      <div id="responseMessage" class="response-message" style="display: none;"></div>
+
+      <button type="submit" class="cta-button">📅 Book Appointment</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer"></footer>
+
+  <!-- Form Submission Script -->
+  <script>
+    const form = document.getElementById("appointmentForm");
+    const responseMsg = document.getElementById("responseMessage");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch("/api/appointments", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+        responseMsg.style.display = "block";
+
+        if (res.ok) {
+          responseMsg.textContent = data.message;
+          responseMsg.style.color = "limegreen";
+          form.reset();
+        } else {
+          responseMsg.textContent = data.error || "Something went wrong.";
+          responseMsg.style.color = "crimson";
+        }
+      } catch (err) {
+        console.error("Submission error:", err);
+        responseMsg.style.display = "block";
+        responseMsg.textContent = "Error submitting form.";
+        responseMsg.style.color = "crimson";
+      }
+    });
+  </script>
+</body>
+</html>
