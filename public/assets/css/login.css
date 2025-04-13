@@ -1,73 +1,62 @@
-/* =========================================
-   Dominguez Tech Solutions - Login Styling
-========================================= */
+/* ================================================
+   Admin Login Section - DominguezTechSolutions
+================================================ */
 
-/* Section Container */
 .login-section {
   background-color: #0b1120;
+  color: #f4f4f4;
   padding: 4rem 1.5rem;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 90vh;
 }
 
-/* Login Box */
 .login-container {
-  background-color: #111c30;
+  background-color: #0e182b;
   border: 2px solid rgba(255, 215, 0, 0.15);
   border-radius: 12px;
   padding: 2.5rem;
-  max-width: 420px;
+  max-width: 500px;
   width: 100%;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.1);
-  text-align: center;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.08);
 }
 
-/* Title and Subtext */
 .login-title {
   color: gold;
   font-size: 2rem;
+  text-align: center;
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
 .login-subtext {
+  text-align: center;
   font-size: 1rem;
   color: #ccc;
   margin-bottom: 2rem;
 }
 
-/* Login Form */
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
 .login-form .form-group {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+  margin-bottom: 1.5rem;
 }
 
 .login-form label {
-  color: gold;
-  font-weight: 600;
+  display: block;
+  font-weight: bold;
+  color: #ffd700;
   margin-bottom: 0.5rem;
-  font-size: 1rem;
 }
 
-.login-form input[type="text"],
-.login-form input[type="password"],
-.login-form input[type="email"] {
+.login-form input {
+  width: 100%;
   padding: 0.75rem;
   border-radius: 6px;
   border: none;
-  font-size: 1rem;
   background-color: #192841;
   color: #f4f4f4;
-  transition: box-shadow 0.3s ease;
+  font-size: 1rem;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .login-form input::placeholder {
@@ -76,39 +65,38 @@
 
 .login-form input:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.4);
+  background-color: #1f2f4a;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.35);
 }
 
-/* Submit Button */
-.login-form button[type="submit"] {
-  padding: 0.75rem;
-  font-size: 1rem;
-  font-weight: bold;
+.login-form button {
+  width: 100%;
   background-color: gold;
   color: #0b1120;
   border: none;
+  padding: 0.8rem;
+  font-size: 1.05rem;
+  font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.login-form button[type="submit"]:hover {
+.login-form button:hover {
   background-color: #ffe066;
-  transform: scale(1.05);
   box-shadow: 0 0 12px gold;
+  transform: scale(1.03);
 }
 
-/* Response Message */
-#loginMessage {
+.login-message {
   margin-top: 1rem;
-  font-size: 0.95rem;
-  color: #ffd700;
-  font-weight: 500;
+  font-weight: bold;
   text-align: center;
+  color: #ffd700;
 }
 
-/* Responsive Design */
-@media (max-width: 500px) {
+/* Responsive Enhancements */
+@media (max-width: 600px) {
   .login-container {
     padding: 2rem 1.2rem;
   }
@@ -117,34 +105,7 @@
     font-size: 1.6rem;
   }
 
-  .login-form button[type="submit"] {
-    font-size: 0.95rem;
-    padding: 0.65rem;
+  .login-form button {
+    font-size: 1rem;
   }
-}
-
-/* =========================================
-   Password Input Styling - DominguezTechSolutions
-========================================= */
-
-#password {
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  background-color: #192841;
-  color: #f4f4f4;
-  width: 100%;
-  box-sizing: border-box;
-  transition: box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-#password::placeholder {
-  color: #aab1c0;
-}
-
-#password:focus {
-  outline: none;
-  background-color: #1f2f4a;
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.35);
 }
