@@ -3,17 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Chatbot | Dominguez Tech Solutions</title>
-  <meta name="description" content="Interact with our intelligent chatbot built using HOPS AI Execution to support OKC businesses and beyond." />
+  <title>AI Assistant | Dominguez Tech Solutions</title>
+  <meta name="description" content="Speak with our intelligent AI Assistant powered by HOPS — Designed to support entrepreneurs, businesses, and institutions 24/7." />
+  <meta name="author" content="Pedro Dominguez" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <script type="module" src="assets/js/script.js"></script>
+  <script type="module" src="assets/js/theme-toggle.js"></script>
 </head>
 <body>
+  <!-- Navigation -->
   <nav class="navbar"></nav>
 
+  <!-- Chatbot Interface -->
   <section class="chatbot-container">
-    <h1 class="chatbot-title">Talk to Our AI Assistant 🤖</h1>
-    <p class="chatbot-subtext">Powered by HOPS AI Execution — Available 24/7 to support your business, tech, and consultation needs.</p>
+    <h1 class="chatbot-title">Dominguez Tech AI Assistant 🤖</h1>
+    <p class="chatbot-subtext">
+      Powered by our proprietary <strong>HOPS AI Execution Framework</strong>, this assistant supports local businesses,
+      visionary entrepreneurs, and even public institutions in making intelligent decisions faster.
+    </p>
 
     <div id="chat-box" class="chat-box"></div>
 
@@ -21,13 +28,18 @@
       <input
         type="text"
         id="user-input"
-        placeholder="Type your question here..."
+        placeholder="Ask a question or describe your tech need..."
         autocomplete="off"
       />
-      <button id="send-btn" aria-label="Send message">➤</button>
+      <button id="send-btn" class="send-btn" aria-label="Send message">➤</button>
     </div>
+
+    <p class="chatbot-disclaimer">
+      Need a custom solution? <a href="appointment-booker.html">Book a free consultation with Pedro</a>.
+    </p>
   </section>
 
+  <!-- Footer -->
   <footer id="footer"></footer>
 </body>
 </html>
