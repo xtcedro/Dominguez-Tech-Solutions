@@ -1,0 +1,78 @@
+/* ===============================
+   Blog List - DominguezTechSolutions
+================================== */
+
+.blog-list {
+  background-color: #0a1225;
+  padding: 3rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.1);
+  color: #f4f4f4;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  margin-top: 2rem;
+}
+
+#blogContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Individual Blog Post Container */
+.blog-post {
+  background-color: #101d35;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 5px solid gold;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+/* Blog Title */
+.blog-post h3 {
+  color: #ffd700;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Blog Meta Info */
+.blog-post .meta {
+  font-size: 0.9rem;
+  color: #bbbbbb;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+/* Blog Content Preview */
+.blog-post p {
+  color: #dddddd;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* Blog Links */
+.blog-post a {
+  color: gold;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.blog-post a:hover {
+  color: #ffe66b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-post h3 {
+    font-size: 1.3rem;
+  }
+
+  .blog-post p {
+    font-size: 1rem;
+  }
+}
