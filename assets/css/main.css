@@ -157,35 +157,3 @@ li {
   text-align: center;
 }
 
-/* Contact Info */
-.contact-info {
-  background-color: #182e4a;
-  border-top: 2px solid #ffd700;
-  font-size: 0.95rem;
-}
-
-.contact-info a {
-  color: #ffd700;
-  text-decoration: underline;
-}
-
-/* Responsive Typography */
-@media (min-width: 600px) {
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-}
-
-@media (min-width: 900px) {
-  body {
-    font-size: 1.1rem;
-  }
-
-  .cta-button {
-    font-size: 1.05rem;
-  }
-}
