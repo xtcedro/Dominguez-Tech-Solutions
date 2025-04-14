@@ -1,96 +1,110 @@
-// payment.js
+let stripePublicKey = "";
 
-const stripe = Stripe(
-  "pk_live_51QsBMaB2ZF7d2k3EpiLM1QRwI3s2RL2PJl57Ctkl0tAxouh6kcP9F580Iyo3eW6qVTGix5f6eQdXNHmMgOxyO2Td00KiYFudmT"
-);
-
-const elements = stripe.elements();
-const card = elements.create("card", {
-  style: {
-    base: {
-      color: "#f4f4f4",
-      fontFamily: "'Segoe UI', Tahoma, sans-serif",
-      fontSize: "16px",
-      "::placeholder": {
-        color: "#aaa",
-      },
-    },
-    invalid: {
-      color: "#ff6b6b",
-      iconColor: "#ff6b6b",
-    },
-  },
-});
-card.mount("#card-element");
-
-const form = document.getElementById("payment-form");
-const messageEl = document.getElementById("payment-message");
-const amountInput = document.getElementById("payment-amount");
-
-// Handle form submission
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  messageEl.textContent = "Processing payment...";
-
-  const amount = parseFloat(amountInput.value) * 100; // Convert to cents
-  if (isNaN(amount) || amount <= 0) {
-    messageEl.textContent = "Please enter a valid amount.";
-    return;
-  }
-
+// Step 1: Fetch public key from backend
+async function fetchPublicKey() {
   try {
-    // Create a PaymentIntent on the server
-    const res = await fetch("/api/payments/create-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: Math.round(amount) }),
-    });
-
+    const res = await fetch("/api/stripe/public-key");
     const data = await res.json();
+    stripePublicKey = data.publicKey;
 
-    if (!res.ok) {
-      messageEl.textContent = data.error || "Failed to create payment intent.";
+    if (!stripePublicKey) {
+      throw new Error("Stripe public key not found.");
+    }
+
+    initializePaymentFlow(stripePublicKey);
+  } catch (err) {
+    document.getElementById("payment-message").textContent =
+      "❌ Unable to load payment form.";
+    console.error("Stripe Key Fetch Error:", err.message);
+  }
+}
+
+function initializePaymentFlow(publicKey) {
+  const stripe = Stripe(publicKey);
+  const elements = stripe.elements();
+
+  const cardElement = elements.create("card");
+  cardElement.mount("#card-element");
+
+  const paymentRequest = stripe.paymentRequest({
+    country: "US",
+    currency: "usd",
+    total: {
+      label: "Heavenly Roofing LLC",
+      amount: 0, // dynamically set
+    },
+    requestPayerName: true,
+    requestPayerEmail: true,
+  });
+
+  const prButton = elements.create("paymentRequestButton", {
+    paymentRequest,
+  });
+
+  paymentRequest.canMakePayment().then((result) => {
+    if (result) {
+      prButton.mount("#payment-request-button");
+    } else {
+      document.getElementById("payment-request-button").style.display = "none";
+    }
+  });
+
+  const paymentForm = document.getElementById("payment-form");
+  const amountInput = document.getElementById("payment-amount");
+  const payButton = document.getElementById("payment-button");
+  const messageBox = document.getElementById("payment-message");
+
+  paymentForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const amount = parseFloat(amountInput.value) * 100;
+    if (isNaN(amount) || amount <= 0) {
+      messageBox.textContent = "❌ Please enter a valid amount.";
       return;
     }
 
-    const result = await stripe.confirmCardPayment(data.clientSecret, {
-      payment_method: {
-        card: card,
-      },
-    });
+    payButton.disabled = true;
+    messageBox.textContent = "Processing payment...";
 
-    if (result.error) {
-      messageEl.textContent = `❌ ${result.error.message}`;
-    } else if (result.paymentIntent.status === "succeeded") {
-      messageEl.textContent = "✅ Payment successful! Thank you.";
-      form.reset();
-      card.clear();
+    try {
+      const res = await fetch("/api/stripe/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount }),
+      });
+
+      const { clientSecret } = await res.json();
+
+      paymentRequest.on("paymentmethod", async (event) => {
+        const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: event.paymentMethod.id,
+        });
+
+        if (error) {
+          event.complete("fail");
+          messageBox.textContent = `❌ ${error.message}`;
+        } else {
+          event.complete("success");
+          messageBox.textContent = "✅ Payment successful!";
+        }
+      });
+
+      const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: { card: cardElement },
+      });
+
+      if (error) {
+        messageBox.textContent = `❌ ${error.message}`;
+        payButton.disabled = false;
+      } else if (paymentIntent.status === "succeeded") {
+        messageBox.textContent = "✅ Thank you for your payment!";
+      }
+    } catch (err) {
+      messageBox.textContent = `❌ ${err.message}`;
+      payButton.disabled = false;
     }
-  } catch (err) {
-    console.error("Payment Error:", err);
-    messageEl.textContent = "An error occurred while processing payment.";
-  }
-});
+  });
+}
 
-// Payment Request Button (for Apple Pay, Google Pay, etc.)
-const prButton = stripe.paymentRequest({
-  country: "US",
-  currency: "usd",
-  total: {
-    label: "Dominguez Tech Payment",
-    amount: 1999, // Default example amount
-  },
-  requestPayerName: true,
-  requestPayerEmail: true,
-});
-
-prButton.canMakePayment().then((result) => {
-  if (result) {
-    const prElement = elements.create("paymentRequestButton", {
-      paymentRequest: prButton,
-    });
-    prElement.mount("#payment-request-button");
-  } else {
-    document.getElementById("payment-request-button").style.display = "none";
-  }
-});
+// Initialize
+fetchPublicKey();
