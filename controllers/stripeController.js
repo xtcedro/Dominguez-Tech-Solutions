@@ -24,7 +24,7 @@ export const createPaymentIntent = async (req, res) => {
     }
 };
 
-export const fetchStripeTransactions = async (req, res) => {
+export const fetchTransactions = async (req, res) => {
   try {
     const payments = await stripe.paymentIntents.list({
       limit: 10, // Adjust the limit as needed
