@@ -10,102 +10,22 @@
   <script type="module" src="assets/js/script.js"></script>
 </head>
 <body>
+  <!-- Navigation -->
   <nav class="navbar"></nav>
 
+  <!-- Appointment Display Section -->
   <section class="appointments-section">
     <h1 class="appointments-title">📋 Appointment Submissions</h1>
-    <p class="appointments-subtext">View and delete appointments submitted through Dominguez Tech Solutions.</p>
+    <p class="appointments-subtext">
+      View and delete appointments submitted through Dominguez Tech Solutions.
+    </p>
 
     <div id="appointments-container" class="appointments-container">
       <p class="loading">Loading appointments...</p>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer id="footer"></footer>
-
-  <script>
-    const API_BASE_URL = window.location.origin.includes('localhost')
-      ? 'http://localhost:3000'
-      : 'https://www.domingueztechsolutions.com';
-
-    async function fetchAppointments() {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/appointments`, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        });
-
-        const appointments = await response.json();
-        const container = document.getElementById('appointments-container');
-        container.innerHTML = '';
-
-        if (!appointments.length) {
-          container.innerHTML = '<p class="no-appointments">No appointments found. 📅</p>';
-          return;
-        }
-
-        appointments.forEach((appointment) => {
-          const card = document.createElement('div');
-          card.className = 'appointment-card';
-
-          const created = new Date(appointment.created_at).toLocaleString();
-
-          card.innerHTML = `
-            <h3>👤 ${appointment.name}</h3>
-            <p><strong>📧 Email:</strong> ${appointment.email}</p>
-            <p><strong>📞 Phone:</strong> ${appointment.phone}</p>
-            <p><strong>📅 Booked On:</strong> ${created}</p>
-            <p><strong>🛠️ Service:</strong> ${appointment.service || 'N/A'}</p>
-            <p><strong>💬 Details:</strong> ${appointment.message || 'None'}</p>
-            <button class="delete-btn" data-id="${appointment.id}">❌ Delete</button>
-          `;
-
-          container.appendChild(card);
-        });
-
-        bindDeleteButtons();
-      } catch (error) {
-        console.error('Fetch error:', error);
-        document.getElementById('appointments-container').innerHTML =
-          `<p class="error-message">Error fetching appointments: ${error.message}</p>`;
-      }
-    }
-
-    function bindDeleteButtons() {
-      const buttons = document.querySelectorAll('.delete-btn');
-      buttons.forEach((btn) => {
-        btn.addEventListener('click', async () => {
-          const id = btn.dataset.id;
-          const token = localStorage.getItem('adminToken');
-
-          if (!confirm('Are you sure you want to delete this appointment?')) return;
-
-          try {
-            const res = await fetch(`${API_BASE_URL}/api/appointments/${id}`, {
-              method: 'DELETE',
-              headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-              },
-            });
-
-            const result = await res.json();
-
-            if (res.ok) {
-              alert('✅ Appointment deleted.');
-              fetchAppointments(); // Reload
-            } else {
-              alert(`❌ ${result.error}`);
-            }
-          } catch (err) {
-            alert('❌ Failed to delete appointment.');
-            console.error(err);
-          }
-        });
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', fetchAppointments);
-  </script>
 </body>
 </html>
