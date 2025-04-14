@@ -87,7 +87,7 @@
         document.getElementById('contact-email').textContent = data.contact_email;
         document.getElementById('contact-email').href = `mailto:${data.contact_email}`;
         document.getElementById('business-phone').textContent = data.business_phone;
-        document.getElementById('business-phone').href = `telto:${data.business_phone}`;
+        document.getElementById('business-phone').href = `tel:${data.business_phone}`;
       })
       .catch(err => {
         console.error("Failed to load site settings:", err.message);
