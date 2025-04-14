@@ -36,7 +36,7 @@ export const fetchAppointments = async (req, res) => {
 };
 
 // DELETE /api/appointments/:id
-export const deleteAppointment = async (req, res) => {
+export const deleteAppointments = async (req, res) => {
   const { id } = req.params;
 
   if (!id) {
