@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Blog Posts | Dominguez Tech Solutions</title>
+  <meta name="description" content="Edit and manage blog posts on DominguezTechSolutions.com" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script type="module" src="assets/js/edit-blog.js" defer></script>
+</head>
+<body>
+  <nav class="navbar"></nav>
+
+  <main class="settings-form-wrapper">
+    <h1 style="text-align: center; color: gold; margin-bottom: 1rem;">
+      ✏️ Edit Blog Posts
+    </h1>
+
+    <section>
+      <label for="postSelect">Select a Blog Post:</label>
+      <select id="postSelect" class="form-group" required>
+        <option disabled selected value="">Loading blog titles...</option>
+      </select>
+    </section>
+
+    <form class="settings-form" id="editBlogForm">
+      <div class="form-group">
+        <label for="editTitle">Blog Title</label>
+        <input type="text" id="editTitle" name="title" placeholder="Edit blog title..." required />
+      </div>
+
+      <div class="form-group">
+        <label for="editAuthor">Author</label>
+        <input type="text" id="editAuthor" name="author" placeholder="Edit author..." required />
+      </div>
+
+      <div class="form-group">
+        <label for="editSummary">Summary</label>
+        <textarea id="editSummary" name="summary" placeholder="Edit summary..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="editContent">Content</label>
+        <textarea id="editContent" name="content" placeholder="Edit content..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn">💾 Save Changes</button>
+      <p id="editBlogMessage" class="response-message info" style="margin-top: 20px; display: none;"></p>
+    </form>
+  </main>
+
+  <footer id="footer"></footer>
+</body>
+</html>
