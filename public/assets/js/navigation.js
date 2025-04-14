@@ -46,12 +46,12 @@ export function setupNavigation() {
           <button class="close-menu" id="close-menu" aria-label="Close navigation">✖</button>
         </div>
         <ul class="nav-links">
-          <li><a href="auth/admin-dashboard.html">📊 Dashboard</a></li>
+          <li><a href="admin-dashboard.html">📊 Dashboard</a></li>
           <li><a href="add-blog.html">📝 Add Blog</a></li>
           <li><a href="edit-blogs.html">✏️ Edit Blogs</a></li>
-          <li><a href="auth/public-appointments.html">📋 Appointments</a></li>
+          <li><a href="public-appointments.html">📋 Appointments</a></li>
           <li><a href="transactions.html">💳 Transactions</a></li>
-          <li><a href="auth/settings.html">⚙️ Settings</a></li>
+          <li><a href="settings.html">⚙️ Settings</a></li>
         </ul>
         <div class="nav-container">
           <a href="#" class="nav-button" id="logout-link">🚪 Logout</a>
