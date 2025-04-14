@@ -20,13 +20,9 @@ router.get("/", (req, res, next) => {
   next();
 }, fetchAppointments);
 
-<<<<<<< HEAD
-=======
-// Log for deleting an appointment with auth middleware
-router.delete("/", (req, res, next) => {
-  console.log("Incoming DELETE /api/appointments with body:", req.body);
+router.delete("/:id", (req, res, next) => {
+  console.log("Incoming DELETE /api/appointments/:id with ID:", req.params.id);
   next();
-}, verifyAdminToken, deleteAppointment); // <- Secure with token
->>>>>>> refs/remotes/origin/main
+}, verifyAdminToken, deleteAppointment);
 
 export default router;
