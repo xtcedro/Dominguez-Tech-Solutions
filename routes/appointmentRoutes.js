@@ -1,16 +1,15 @@
 import express from "express";
 import {
   submitAppointment,
-  fetchAppointments
+  fetchAppointments,
+  deleteAppointment
 } from "../controllers/appointmentController.js";
 import { verifyAdminToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Public route for submitting an appointment
 router.post("/", submitAppointment);
-
-// Protected route for fetching all appointments
 router.get("/", verifyAdminToken, fetchAppointments);
+router.delete("/:id", verifyAdminToken, deleteAppointment); // <-- new route
 
 export default router;
