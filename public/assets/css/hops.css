@@ -1,0 +1,75 @@
+/* ========================================
+   HOPS Execution Section - DominguezTechSolutions
+   Transforming AI with Governance & Precision
+======================================== */
+
+.hops-execution {
+  background-color: #0b1120;
+  color: #f5f5f5;
+  padding: 3rem 1.5rem;
+  max-width: 950px;
+  margin: 0 auto 3rem auto;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+  text-align: center;
+}
+
+.hops-title {
+  font-size: 2.25rem;
+  color: gold;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.hops-subtext {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: #dddddd;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.hops-subtext strong {
+  color: #ffd700;
+}
+
+.hops-features {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  text-align: left;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.hops-features li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  color: #e6e6e6;
+  line-height: 1.6;
+}
+
+.hops-features li::before {
+  content: "⚙️";
+  position: absolute;
+  left: 0;
+  font-size: 1.1rem;
+  color: gold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hops-title {
+    font-size: 1.75rem;
+  }
+
+  .hops-subtext {
+    font-size: 1rem;
+  }
+
+  .hops-features li {
+    font-size: 1rem;
+  }
+}
