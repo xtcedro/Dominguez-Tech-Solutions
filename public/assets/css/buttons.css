@@ -1,0 +1,70 @@
+/* ================================
+   Social Buttons - DominguezTechSolutions
+================================= */
+
+.social-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.social-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.1);
+  border: 2px solid transparent;
+}
+
+.social-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.25);
+}
+
+/* Platform-specific styling */
+.social-button.twitter {
+  background-color: #1da1f2;
+  border-color: #1da1f2;
+}
+
+.social-button.twitter:hover {
+  background-color: #0d8ce0;
+}
+
+.social-button.facebook {
+  background-color: #1877f2;
+  border-color: #1877f2;
+}
+
+.social-button.facebook:hover {
+  background-color: #0f5ac1;
+}
+
+.social-button.github {
+  background-color: #24292e;
+  border-color: #24292e;
+}
+
+.social-button.github:hover {
+  background-color: #1b1f23;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .social-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .social-button {
+    width: 90%;
+    text-align: center;
+  }
+}
