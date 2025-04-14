@@ -1,0 +1,119 @@
+/* ===============================
+   Payment Page Styling - Dominguez Tech Solutions
+================================ */
+
+.payment-section {
+  background: linear-gradient(135deg, #0b1120, #121f36);
+  padding: 3rem 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.1);
+  color: #f4f4f4;
+  text-align: center;
+}
+
+.payment-section h2 {
+  font-size: 1.75rem;
+  color: gold;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+.payment-section p {
+  color: #ccc;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+#payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#payment-form label {
+  font-weight: bold;
+  text-align: left;
+  color: #ffd700;
+}
+
+#payment-form input[type="number"] {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #1e2b44;
+  color: #f4f4f4;
+}
+
+#card-element {
+  background-color: #1e2b44;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 215, 0, 0.15);
+}
+
+#payment-button {
+  background-color: gold;
+  color: #0b1120;
+  padding: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#payment-button:hover {
+  background-color: #ffe066;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+}
+
+#payment-message {
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  color: #b0b0b0;
+}
+
+#payment-request-button {
+  margin-top: 1rem;
+}
+
+/* Payment Info */
+.payment-info {
+  margin: 3rem auto 2rem;
+  text-align: center;
+  color: #f4f4f4;
+  max-width: 600px;
+}
+
+.payment-info h2 {
+  font-size: 1.5rem;
+  color: gold;
+  margin-bottom: 0.5rem;
+}
+
+.payment-info ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.payment-info li {
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .payment-section, .payment-info {
+    padding: 2rem 1rem;
+  }
+
+  .payment-section h2, .payment-info h2 {
+    font-size: 1.5rem;
+  }
+}
