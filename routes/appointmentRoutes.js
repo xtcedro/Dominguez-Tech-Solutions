@@ -9,6 +9,6 @@ router.post("/", submitAppointment);
 // Fetch all appointments route
 router.get("/", fetchAppointments);
 
-router.get("/", deleteAppointments);
+router.get("/", deleteAppointment);
 
 export default router;
