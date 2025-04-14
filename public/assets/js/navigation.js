@@ -49,7 +49,7 @@ export function setupNavigation() {
           <li><a href="admin-dashboard.html">📊 Dashboard</a></li>
           <li><a href="add-blog.html">📝 Add Blog</a></li>
           <li><a href="edit-blogs.html">✏️ Edit Blogs</a></li>
-          <li><a href="public-appointments.html">📋 Appointments</a></li>
+          <li><a href="public-appointments.html">📋 Manage Appointments</a></li>
           <li><a href="transactions.html">💳 Transactions</a></li>
           <li><a href="settings.html">⚙️ Settings</a></li>
         </ul>
