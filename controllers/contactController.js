@@ -34,3 +34,25 @@ export const submitContactMessage = async (req, res) => {
   }
 };
 
+export const fetchContactMessages = async (req, res) => {
+  try {
+    const db = await mysql.createConnection(dbConfig);
+
+    // Check if created_at column exists
+    const [columns] = await db.execute("SHOW COLUMNS FROM contact_messages LIKE 'created_at'");
+    const orderBy = columns.length > 0 ? "created_at" : "id";
+
+    const [messages] = await db.execute(
+      `SELECT * FROM contact_messages ORDER BY ${orderBy} DESC`
+    );
+
+    await db.end();
+
+    console.log(`📦 Retrieved ${messages.length} contact messages.`);
+    res.status(200).json(messages);
+  } catch (error) {
+    console.error("❌ Error fetching contact messages:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
