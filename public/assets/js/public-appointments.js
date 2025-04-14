@@ -54,36 +54,4 @@ async function fetchAppointments() {
     console.error('Error fetching appointments:', error);
   }
 }
-
-
-async function deleteAppointment {
-  const confirmDelete = confirm("Are you sure you want to delete this appointment?");
-  if (!confirmDelete) return;
-
-  try {
-    const token = localStorage.getItem("adminToken");
-    const res = await fetch(`${API_BASE_URL}/api/appointments`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ id }),
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      alert('Appointment deleted successfully!');
-      fetchAppointments();
-    } else {
-      alert(`Failed to delete: ${data.error}`);
-    }
-  } catch (err) {
-    console.error('Delete Error:', err);
-    alert('Something went wrong while deleting the appointment.');
-  }
-}
-
-
 document.addEventListener('DOMContentLoaded', fetchAppointments);
