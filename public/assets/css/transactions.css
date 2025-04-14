@@ -1,0 +1,86 @@
+/* ================================
+   Transactions Page - DominguezTechSolutions
+================================ */
+
+.transactions-page {
+  padding: 2rem 1rem;
+  background-color: #0b1120;
+  min-height: 100vh;
+  color: #f4f4f4;
+}
+
+.transactions-section {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #111c30;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.08);
+}
+
+.transactions-title {
+  font-size: 2rem;
+  color: gold;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.transactions-subtext {
+  font-size: 1rem;
+  color: #d0d0d0;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.transactions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.transaction-card {
+  background-color: #162338;
+  padding: 1.25rem;
+  border-left: 4px solid gold;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.transaction-card:hover {
+  background-color: #1e2f49;
+}
+
+.transaction-card h3 {
+  color: gold;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.transaction-card p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+}
+
+.loading,
+.error-message {
+  text-align: center;
+  font-size: 1rem;
+  color: #cccccc;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .transactions-section {
+    padding: 1.5rem;
+  }
+
+  .transactions-title {
+    font-size: 1.6rem;
+  }
+
+  .transaction-card {
+    padding: 1rem;
+  }
+}
