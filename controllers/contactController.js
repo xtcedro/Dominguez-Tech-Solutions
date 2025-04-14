@@ -34,17 +34,3 @@ export const submitContactMessage = async (req, res) => {
   }
 };
 
-// controllers/contactController.js
-export const fetchContactMessages = async (req, res) => {
-  try {
-    const db = await mysql.createConnection(dbConfig);
-    const [messages] = await db.execute("SELECT * FROM contact_messages ORDER BY created_at DESC");
-    await db.end();
-
-    console.log(`📦 Retrieved ${messages.length} contact messages.`);
-    res.status(200).json(messages);
-  } catch (error) {
-    console.error("❌ Error fetching contact messages:", error.message);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
