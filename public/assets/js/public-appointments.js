@@ -1,8 +1,8 @@
-export const API_BASE_URL = window.location.origin.includes('localhost')
+const API_BASE_URL = window.location.origin.includes('localhost')
   ? 'http://localhost:3000'
   : 'https://www.domingueztechsolutions.com';
 
-export async function fetchAppointments() {
+async function fetchAppointments() {
   try {
     const response = await fetch(`${API_BASE_URL}/api/appointments`, {
       method: 'GET',
@@ -41,7 +41,6 @@ export async function fetchAppointments() {
       appointmentsContainer.appendChild(appointmentCard);
     });
 
-    // Add delete event listeners
     document.querySelectorAll('.delete-btn').forEach((btn) => {
       btn.addEventListener('click', async () => {
         const id = btn.getAttribute('data-id');
@@ -56,7 +55,7 @@ export async function fetchAppointments() {
   }
 }
 
-export async function deleteAppointment(id) {
+async function deleteAppointment(id) {
   const confirmDelete = confirm("Are you sure you want to delete this appointment?");
   if (!confirmDelete) return;
 
@@ -84,5 +83,4 @@ export async function deleteAppointment(id) {
   }
 }
 
-// Auto-fetch when the page loads
 document.addEventListener('DOMContentLoaded', fetchAppointments);
