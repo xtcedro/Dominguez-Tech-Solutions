@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💳 Transactions | Dominguez Tech Solutions</title>
+  <meta name="description" content="View recent Stripe transactions processed through Dominguez Tech Solutions.">
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script type="module" src="assets/js/script.js"></script>
+  <script defer src="assets/js/auth.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar"></nav>
+
+  <main class="transactions-page">
+    <section class="transactions-section">
+      <h1 class="transactions-title">💳 Recent Transactions</h1>
+      <p class="transactions-subtext">Below is a list of payments processed through Dominguez Tech Solutions.</p>
+
+      <div id="transactions-container" class="transactions-container">
+        <p class="loading">Loading transactions...</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer"></footer>
+
+  <script>
+    const API_BASE_URL = window.location.origin.includes("localhost")
+      ? "http://localhost:3000"
+      : "https://www.domingueztechsolutions.com";
+
+    async function fetchTransactions() {
+      const container = document.getElementById("transactions-container");
+      container.innerHTML = "<p class='loading'>Loading transactions...</p>";
+
+      try {
+        const token = localStorage.getItem("adminToken");
+        const res = await fetch(`${API_BASE_URL}/api/stripe/transactions`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          }
+        });
+
+        if (!res.ok) throw new Error(`Status: ${res.status}`);
+
+        const data = await res.json();
+        container.innerHTML = "";
+
+        if (!data.length) {
+          container.innerHTML = "<p class='no-transactions'>No transactions found.</p>";
+          return;
+        }
+
+        data.forEach(tx => {
+          const card = document.createElement("div");
+          card.className = "transaction-card";
+
+          const date = new Date(tx.created * 1000).toLocaleString();
+          const amount = (tx.amount / 100).toFixed(2);
+
+          card.innerHTML = `
+            <p><strong>🧾 ID:</strong> ${tx.id}</p>
+            <p><strong>💰 Amount:</strong> $${amount}</p>
+            <p><strong>📅 Date:</strong> ${date}</p>
+            <p><strong>🔄 Status:</strong> ${tx.status}</p>
+            <p><strong>💳 Method:</strong> ${tx.payment_method_types.join(", ")}</p>
+          `;
+
+          container.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error("❌ Error loading transactions:", err);
+        container.innerHTML = `<p class="error-message">Error: ${err.message}</p>`;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchTransactions);
+  </script>
+</body>
+</html>
