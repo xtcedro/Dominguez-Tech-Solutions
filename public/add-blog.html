@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create a new blog post for Dominguez Tech Solutions." />
+  <meta name="author" content="Pedro Dominguez" />
+  <title>Add Blog Post - Dominguez Tech Solutions</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script type="module" src="assets/js/script.js"></script>
+  <script src="assets/js/auth.js"></script>
+</head>
+<body>
+  <nav class="navbar"></nav>
+
+  <main>
+    <section class="settings-form-wrapper">
+      <h1 style="text-align: center; color: gold; margin-bottom: 1rem;">
+        ➕ Add New Blog Post
+      </h1>
+
+      <form class="settings-form" id="blogForm">
+        <div class="form-group">
+          <label for="title">Blog Title</label>
+          <input type="text" id="title" name="title" placeholder="Enter blog title..." required />
+        </div>
+
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author" placeholder="Your name..." required />
+        </div>
+
+        <div class="form-group">
+          <label for="summary">Summary</label>
+          <textarea id="summary" name="summary" placeholder="Brief summary..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea id="content" name="content" placeholder="Write your blog post..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn">Publish Blog</button>
+      </form>
+
+      <p id="blogMessage" class="response-message info" style="margin-top: 20px; display: none;"></p>
+    </section>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("blogForm");
+      const messageBox = document.getElementById("blogMessage");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const blogPost = {
+          title: form.title.value.trim(),
+          author: form.author.value.trim(),
+          summary: form.summary.value.trim(),
+          content: form.content.value.trim(),
+        };
+
+        if (!blogPost.title || !blogPost.author || !blogPost.summary || !blogPost.content) {
+          messageBox.textContent = "❌ All fields are required.";
+          messageBox.className = "response-message error show";
+          messageBox.style.display = "block";
+          return;
+        }
+
+        try {
+          const res = await fetch("/api/blogs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(blogPost),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            messageBox.textContent = `❌ ${data.error || "Failed to publish blog."}`;
+            messageBox.className = "response-message error show";
+            return;
+          }
+
+          messageBox.textContent = "✅ Blog post published successfully!";
+          messageBox.className = "response-message success show";
+          form.reset();
+        } catch (err) {
+          messageBox.textContent = `❌ ${err.message}`;
+          messageBox.className = "response-message error show";
+        }
+
+        messageBox.style.display = "block";
+      });
+    });
+  </script>
+</body>
+</html>
