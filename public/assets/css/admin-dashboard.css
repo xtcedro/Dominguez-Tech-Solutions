@@ -184,3 +184,20 @@
     padding: 0.75rem 1.5rem;
   }
 }
+
+/* Dashboard Links Styling */
+#dashboard-content a,
+#dashboard-tools a {
+  color: gold;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: block;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+#dashboard-content a:hover,
+#dashboard-tools a:hover {
+  color: #fff3c6;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
