@@ -11,4 +11,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupNavigation();
   initializeChatbot();
   fetchAppointments();
+  deleteAppointment();
 });
