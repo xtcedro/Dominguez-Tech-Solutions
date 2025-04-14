@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Admin Logout - Dominguez Tech Solutions" />
+  <meta name="author" content="Pedro Dominguez" />
+  <title>Logging Out | Dominguez Tech Solutions</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script defer>
+    document.addEventListener("DOMContentLoaded", () => {
+      localStorage.removeItem("adminToken");
+
+      const message = document.getElementById("logout-message");
+      message.textContent = "✅ You’ve been successfully logged out.";
+
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2000);
+    });
+  </script>
+</head>
+<body>
+  <nav class="navbar"></nav>
+
+  <main class="logout-page">
+    <section class="logout-message-wrapper">
+      <h1>Logging You Out...</h1>
+      <p id="logout-message">Please wait</p>
+    </section>
+  </main>
+
+  <footer id="footer"></footer>
+</body>
+</html>
