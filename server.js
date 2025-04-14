@@ -52,8 +52,8 @@ console.log("➡️ Settings routes loaded at /api/settings");
 app.use("/api/blogs", blogsRoutes);
 console.log("➡️ Blogs routes loaded at /api/blogs");
 
-
 app.use("/api/contact", contactRoutes);
+console.log("➡️ Contact routes loaded at /api/contact");
 
 app.listen(port, () => {
   console.log("⚙️  NodeGenesis is up and running...");
