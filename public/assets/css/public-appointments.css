@@ -83,3 +83,19 @@
     padding: 1rem;
   }
 }
+
+.delete-btn {
+  margin-top: 1rem;
+  background-color: crimson;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}
