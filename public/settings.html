@@ -33,11 +33,6 @@
         <input type="tel" id="businessPhone" name="businessPhone" required placeholder="(555) 555-5555" />
       </div>
 
-      <div class="form-group">
-        <label for="homepageBanner">🖼️ Homepage Banner Path</label>
-        <input type="text" id="homepageBanner" name="homepageBanner" required placeholder="e.g. assets/images/banner.png" />
-      </div>
-
       <button type="submit" class="form-button">💾 Save Settings</button>
       <div id="settingsMessage" class="settings-message"></div>
     </form>
@@ -59,7 +54,6 @@
           form.siteTitle.value = data.site_title || "";
           form.contactEmail.value = data.contact_email || "";
           form.businessPhone.value = data.business_phone || "";
-          form.homepageBanner.value = data.homepage_banner || "";
         } else {
           message.textContent = `⚠️ ${data.error}`;
         }
@@ -75,7 +69,6 @@
           siteTitle: form.siteTitle.value,
           contactEmail: form.contactEmail.value,
           businessPhone: form.businessPhone.value,
-          homepageBanner: form.homepageBanner.value
         };
 
         try {
