@@ -34,3 +34,24 @@ export const fetchAppointments = async (req, res) => {
         res.status(500).json({ error: "Failed to fetch appointments" });
     }
 };
+
+export const deleteAppointment = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: "Appointment ID is required" });
+  }
+
+  try {
+    const [result] = await db.execute("DELETE FROM appointments WHERE id = ?", [id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Appointment not found" });
+    }
+
+    res.status(200).json({ message: "Appointment deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting appointment:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
