@@ -35,7 +35,7 @@ export const updateSiteSettings = async (req, res) => {
   const siteKey = req.query.site || "domtech";
   const { siteTitle, contactEmail, businessPhone, homepageBanner } = req.body;
 
-  if (!siteTitle || !contactEmail || !businessPhone || !homepageBanner) {
+  if (!siteTitle || !contactEmail || !businessPhone) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
@@ -46,15 +46,15 @@ export const updateSiteSettings = async (req, res) => {
 
     if (existing.length === 0) {
       await db.execute(
-        `INSERT INTO site_settings (site_key, site_title, contact_email, business_phone, homepage_banner)
+        `INSERT INTO site_settings (site_key, site_title, contact_email, business_phone)
          VALUES (?, ?, ?, ?, ?)`,
         [siteKey, siteTitle, contactEmail, businessPhone, homepageBanner]
       );
     } else {
       await db.execute(
-        `UPDATE site_settings SET site_title = ?, contact_email = ?, business_phone = ?, homepage_banner = ?
+        `UPDATE site_settings SET site_title = ?, contact_email = ?, business_phone = ?
          WHERE site_key = ?`,
-        [siteTitle, contactEmail, businessPhone, homepageBanner, siteKey]
+        [siteTitle, contactEmail, businessPhone, siteKey]
       );
     }
 
