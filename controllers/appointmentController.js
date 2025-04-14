@@ -34,25 +34,3 @@ export const fetchAppointments = async (req, res) => {
         res.status(500).json({ error: "Failed to fetch appointments" });
     }
 };
-
-// DELETE /api/appointments/:id
-export const deleteAppointment = async (req, res) => {
-  const { id } = req.params;
-
-  if (!id) {
-    return res.status(400).json({ error: "Missing appointment ID" });
-  }
-
-  try {
-    const [result] = await db.execute("DELETE FROM appointments WHERE id = ?", [id]);
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Appointment not found" });
-    }
-
-    res.status(200).json({ message: `Appointment #${id} deleted successfully.` });
-  } catch (error) {
-    console.error("Error deleting appointment:", error.message);
-    res.status(500).json({ error: "Failed to delete appointment" });
-  }
-};
