@@ -7,7 +7,7 @@
   <meta name="description" content="Review inquiries sent by users through the contact form." />
   <link rel="stylesheet" href="assets/css/style.css" />
   <script type="module" src="assets/js/script.js"></script>
-  <script  src="assets/js/auth.js"></script>
+  <script src="assets/js/auth.js"></script>
 </head>
 <body>
   <!-- Navigation -->
@@ -53,7 +53,10 @@
         messages.forEach((msg) => {
           const card = document.createElement("div");
           card.className = "message-card";
-          const timestamp = new Date(msg.created_at).toLocaleString();
+
+          const timestamp = msg.created_at && !isNaN(Date.parse(msg.created_at))
+            ? new Date(msg.created_at).toLocaleString()
+            : "Unavailable";
 
           card.innerHTML = `
             <h3>👤 ${msg.name}</h3>
