@@ -20,10 +20,5 @@ router.get("/", (req, res, next) => {
   next();
 }, fetchAppointments);
 
-// Log for deleting an appointment with auth middleware
-router.delete("/", (req, res, next) => {
-  console.log("Incoming DELETE /api/appointments with body:", req.body);
-  next();
-}, deleteAppointment);
 
 export default router;
