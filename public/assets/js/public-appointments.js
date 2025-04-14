@@ -56,7 +56,7 @@ async function fetchAppointments() {
 }
 
 
-async function deleteAppointment(id) {
+async function deleteAppointment {
   const confirmDelete = confirm("Are you sure you want to delete this appointment?");
   if (!confirmDelete) return;
 
