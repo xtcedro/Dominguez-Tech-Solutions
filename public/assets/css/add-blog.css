@@ -1,0 +1,114 @@
+/* ==========================================
+   Add Blog Post Form - Dominguez Tech Solutions
+========================================== */
+
+.settings-form-wrapper {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2.5rem 1.5rem;
+  background-color: #0b1120;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.1);
+  color: #f5f5f5;
+}
+
+.settings-form-wrapper h1 {
+  font-size: 1.8rem;
+  color: gold;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Layout */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.settings-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-form label {
+  font-weight: 600;
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+}
+
+.settings-form input,
+.settings-form textarea {
+  background-color: #1a273d;
+  color: #f4f4f4;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.settings-form input::placeholder,
+.settings-form textarea::placeholder {
+  color: #aaaaaa;
+}
+
+.settings-form input:focus,
+.settings-form textarea:focus {
+  outline: none;
+  border: 1px solid gold;
+  background-color: #22314a;
+}
+
+/* Submit Button */
+.settings-form .btn {
+  align-self: center;
+  background-color: gold;
+  color: #0b1120;
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.settings-form .btn:hover {
+  background-color: #ffe066;
+  box-shadow: 0 0 12px gold;
+  transform: scale(1.05);
+}
+
+/* Message Display */
+.response-message {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #e6e6e6;
+}
+
+.response-message.info {
+  color: #ffd700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .settings-form-wrapper {
+    padding: 2rem 1rem;
+  }
+
+  .settings-form-wrapper h1 {
+    font-size: 1.6rem;
+  }
+
+  .settings-form input,
+  .settings-form textarea {
+    font-size: 0.95rem;
+  }
+
+  .settings-form .btn {
+    width: 100%;
+  }
+}
