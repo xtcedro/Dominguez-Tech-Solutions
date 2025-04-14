@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Appointments | Dominguez Tech Solutions</title>
-  <meta name="description" content="View and manage all appointment submissions received through Dominguez Tech Solutions." />
-  <meta name="author" content="Pedro Dominguez" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View all reserved appointments for AI training, repairs, web development, and IT consultation.">
+  <title>Reserved Appointments – Public Booking System</title>
+  <link rel="stylesheet" href="assets/css/style.css">
   <script type="module" src="assets/js/script.js"></script>
-  <script defer src="assets/js/auth.js"></script>
-  <script src="assets/js/public-appointments.js"></script>
+  <script src="assets/js/auth.js"></script>
 </head>
 <body>
-  <!-- Navigation -->
+
+  <!-- Navigation Bar -->
   <nav class="navbar"></nav>
 
-  <!-- Appointment Display Section -->
-  <section class="appointments-section">
-    <h1 class="appointments-title">📋 Appointment Submissions</h1>
-    <p class="appointments-subtext">
-      View and delete appointments submitted through Dominguez Tech Solutions.
-    </p>
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+      <h1>📅 Reserved Appointments 📅</h1>
+      <p>⚠️ View all current reservations for AI training, repairs, web apps, and IT consulting.</p>
+    </section>
 
-    <div id="appointments-container" class="appointments-container">
-      <p class="loading">Loading appointments...</p>
-    </div>
-  </section>
+    <!-- Appointments List Section -->
+    <section class="appointments-list fade-in">
+      <h2>📋 Confirmed Bookings</h2>
+      <p class="urgent">🚀 Need expert services? Secure your appointment today!</p>
+      <div id="appointments-container">
+        <p class="loading-message">⏳ Loading reserved appointments... Please wait.</p>
+      </div>
+    </section>
 
-  <!-- Footer -->
+  </main>
+
+  <!-- Footer Section -->
   <footer id="footer"></footer>
+
 </body>
 </html>
