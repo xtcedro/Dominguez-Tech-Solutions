@@ -1,15 +1,12 @@
 import express from "express";
-import {
-  submitAppointment,
-  fetchAppointments,
-  deleteAppointment
-} from "../controllers/appointmentController.js";
-import { verifyAdminToken } from "../middleware/authMiddleware.js";
+import { submitAppointment, fetchAppointments } from "../controllers/appointmentController.js";
 
 const router = express.Router();
 
+// Appointment submission route
 router.post("/", submitAppointment);
-router.get("/", verifyAdminToken, fetchAppointments);
-router.delete("/:id", verifyAdminToken, deleteAppointment); // <-- new route
+
+// Fetch all appointments route
+router.get("/", fetchAppointments);
 
 export default router;
