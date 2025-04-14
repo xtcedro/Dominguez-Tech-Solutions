@@ -22,6 +22,7 @@ export function setupNavigation() {
           <li><a href="about.html">🧑‍💻 About Us</a></li>
           <li><a href="services.html">🛠️ Services</a></li>
           <li><a href="contact.html">📬 Contact</a></li>
+          <li><a href="payment.html">💵 Make A Payment</a></li>
           <li><a href="appointment-booker.html">🗓️ Book an Appointment</a></li>
           <li><a href="chatbot.html">🤖 AI Chatbot</a></li>
           <li><a href="blogs.html">📝 Blogs</a></li>
