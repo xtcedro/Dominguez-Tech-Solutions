@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Messages | Dominguez Tech Solutions</title>
+  <meta name="description" content="Review inquiries sent by users through the contact form." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script type="module" src="assets/js/script.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar"></nav>
+
+  <!-- Messages Section -->
+  <section class="messages-section">
+    <h1 class="messages-title">📨 Contact Form Submissions</h1>
+    <p class="messages-subtext">Browse messages submitted by users through the website.</p>
+
+    <div id="messages-container" class="messages-container">
+      <p class="loading">Loading messages...</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer"></footer>
+
+  <script>
+    const API_BASE_URL = window.location.origin.includes('localhost')
+      ? 'http://localhost:3000'
+      : 'https://www.domingueztechsolutions.com';
+
+    async function fetchContactMessages() {
+      const container = document.getElementById("messages-container");
+      container.innerHTML = "<p class='loading'>Loading messages...</p>";
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/contact`, {
+          headers: { "Content-Type": "application/json" }
+        });
+
+        if (!res.ok) throw new Error(`Status: ${res.status}`);
+
+        const messages = await res.json();
+        container.innerHTML = "";
+
+        if (messages.length === 0) {
+          container.innerHTML = "<p class='no-messages'>No messages found.</p>";
+          return;
+        }
+
+        messages.forEach((msg) => {
+          const card = document.createElement("div");
+          card.className = "message-card";
+          const timestamp = new Date(msg.created_at).toLocaleString();
+
+          card.innerHTML = `
+            <h3>👤 ${msg.name}</h3>
+            <p><strong>📧 Email:</strong> ${msg.email}</p>
+            <p><strong>📞 Phone:</strong> ${msg.phone || "N/A"}</p>
+            <p><strong>🕒 Submitted:</strong> ${timestamp}</p>
+            <p><strong>💬 Message:</strong><br/>${msg.message}</p>
+          `;
+
+          container.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error("❌ Error fetching messages:", err);
+        container.innerHTML = `<p class="error-message">Error: ${err.message}</p>`;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchContactMessages);
+  </script>
+</body>
+</html>
