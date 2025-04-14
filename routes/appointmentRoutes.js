@@ -1,6 +1,6 @@
 import express from "express";
 import { submitAppointment, fetchAppointments } from "../controllers/appointmentController.js";
-
+import { verifyAdminToken } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 // Appointment submission route
