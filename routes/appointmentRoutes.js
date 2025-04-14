@@ -24,6 +24,6 @@ router.get("/", (req, res, next) => {
 router.delete("/", (req, res, next) => {
   console.log("Incoming DELETE /api/appointments with body:", req.body);
   next();
-}, deleteAppointment);
+}, verifyAdminToken, deleteAppointment); // <- Secure with token
 
 export default router;
