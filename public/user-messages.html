@@ -53,9 +53,8 @@
         messages.forEach((msg) => {
           const card = document.createElement("div");
           card.className = "message-card";
-
-          const timestamp = msg.created_at && !isNaN(Date.parse(msg.created_at))
-            ? new Date(msg.created_at).toLocaleString()
+          const timestamp = msg.submitted_at && !isNaN(Date.parse(msg.submitted_at))
+            ? new Date(msg.submitted_at).toLocaleString()
             : "Unavailable";
 
           card.innerHTML = `
