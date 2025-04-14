@@ -2,60 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Make a secure payment to Dominguez Tech Solutions.">
-  <meta name="author" content="Pedro Dominguez" />
-  <title>Make a Payment - Dominguez Tech Solutions</title>
-
-  <!-- Styles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Make secure payments for your tech services at Dominguez Tech Solutions.">
+  <title>💳 Pay Securely - Dominguez Tech Solutions</title>
   <link rel="stylesheet" href="assets/css/style.css" />
-
-  <!-- Stripe.js -->
-  <script src="https://js.stripe.com/v3/"></script>
-
-  <!-- Payment Scripts -->
-  <script type="module" src="assets/js/script.js"></script>
   <script defer src="assets/js/payment.js"></script>
+  <script type="module" src="assets/js/script.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
+
   <!-- Navigation -->
   <nav class="navbar"></nav>
 
-  <main class="payment-page">
-    <section class="hero">
-      <h1>💳 Make a Payment to Dominguez Tech Solutions</h1>
-      <p>Secure payment processing powered by Stripe — supporting Apple Pay, Google Pay, and all major cards.</p>
+  <!-- Hero -->
+  <section class="hero">
+    <h1 class="hero-title">💳 Tech Payments Made Easy</h1>
+    <p class="hero-subtitle">Secure your services with modern and flexible payment methods powered by Stripe.</p>
+  </section>
+
+  <!-- Payment Form -->
+  <main>
+    <section class="payment-section">
+      <h2>📦 Complete Your Payment</h2>
+      <p>Enter your payment amount and choose your preferred method below.</p>
+
+      <form id="payment-form">
+        <label for="payment-amount">💰 Amount ($)</label>
+        <input id="payment-amount" type="number" placeholder="Enter amount" required />
+
+        <!-- Modern Payments -->
+        <div id="payment-request-button"></div>
+
+        <!-- Stripe Card Element -->
+        <div id="card-element"></div>
+
+        <button id="payment-button">💳 Pay Now</button>
+        <p id="payment-message"></p>
+      </form>
     </section>
 
-    <section class="payment-form-wrapper">
-      <form id="payment-form" class="payment-form">
-        <div class="form-group">
-          <label for="payment-amount">Enter Payment Amount (USD)</label>
-          <input
-            type="number"
-            id="payment-amount"
-            name="payment-amount"
-            placeholder="e.g., 199.99"
-            min="1"
-            step="0.01"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="card-element">Card Details</label>
-          <div id="card-element" class="card-box"></div>
-        </div>
-
-        <div id="payment-request-button" class="payment-request-box"></div>
-
-        <button type="submit" id="payment-button" class="btn">Submit Payment</button>
-        <p id="payment-message" class="response-message"></p>
-      </form>
+    <section class="payment-info">
+      <h2>✅ Accepted Payment Methods</h2>
+      <ul>
+        <li>💳 Credit & Debit Cards</li>
+        <li>🍏 Apple Pay</li>
+        <li>📱 Google Pay</li>
+        <li>💵 Cash App Pay</li>
+      </ul>
     </section>
   </main>
 
+  <!-- Support -->
+  <section class="contact">
+    <h2>Need Assistance? 👋</h2>
+    <p>For questions or payment issues, feel free to contact us:</p>
+    <ul>
+      <li>📧 Email: <a href="mailto:domingueztechsolutions@gmail.com">domingueztechsolutions@gmail.com</a></li>
+      <li>📞 Phone: <a href="tel:+14057623899">405-762-3899</a></li>
+    </ul>
+  </section>
+
   <!-- Footer -->
   <footer id="footer"></footer>
+
 </body>
 </html>
