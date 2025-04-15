@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Track key site metrics and performance data.">
+  <title>Site Analytics | Dominguez Tech Solutions</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Scripts -->
+  <script type="module" src="assets/js/script.js"></script>
+  <script defer src="assets/js/auth.js"></script>
+  <script defer src="assets/js/analytics.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar"></nav>
+
+  <main class="analytics-page">
+    <section class="analytics-header">
+      <h1 class="analytics-title">📊 Site Analytics Dashboard</h1>
+      <p class="analytics-subtext">Monitor performance and user interaction across your platform.</p>
+    </section>
+
+    <section class="analytics-metrics">
+      <div class="metric-card">
+        <h2>Total Appointments</h2>
+        <p id="total-appointments" class="metric-value">...</p>
+      </div>
+      <div class="metric-card">
+        <h2>Blog Posts Published</h2>
+        <p id="total-blogs" class="metric-value">...</p>
+      </div>
+      <div class="metric-card">
+        <h2>Contact Form Messages</h2>
+        <p id="total-messages" class="metric-value">...</p>
+      </div>
+      <div class="metric-card">
+        <h2>Payments Processed</h2>
+        <p id="total-transactions" class="metric-value">...</p>
+      </div>
+    </section>
+
+    <section class="analytics-logs">
+      <h2>Recent Activity Logs</h2>
+      <ul id="activity-logs" class="logs-list">
+        <li>Loading activity logs...</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer"></footer>
+</body>
+</html>
