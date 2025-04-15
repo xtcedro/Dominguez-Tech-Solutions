@@ -77,6 +77,16 @@ CREATE TABLE contact_messages (
   submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE projects (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(150) NOT NULL,
+  location VARCHAR(150) NOT NULL,
+  image VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 -- ========================================================
 -- Create User & Grant Privileges
 -- ========================================================
