@@ -10,6 +10,7 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 import settingsRoutes from "./routes/settingsRoutes.js";
 import blogsRoutes from "./routes/blogsRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import analyticsRoutes from './routes/analyticsRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -54,6 +55,10 @@ console.log("➡️ Blogs routes loaded at /api/blogs");
 
 app.use("/api/contact", contactRoutes);
 console.log("➡️ Contact routes loaded at /api/contact");
+
+// Other middleware & routes...
+app.use("/api/analytics", analyticsRoutes);
+console.log("➡️ Analytics routes loaded at /api/analytics");
 
 app.listen(port, () => {
   console.log("⚙️  NodeGenesis is up and running...");
