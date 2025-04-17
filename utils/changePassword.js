@@ -10,15 +10,57 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+// Helper to mask password input
+function askHidden(question) {
+  return new Promise(resolve => {
+    const stdin = process.stdin;
+    const stdout = process.stdout;
+    let password = "";
+
+    stdout.write(question);
+    stdin.setRawMode(true);
+    stdin.resume();
+    stdin.setEncoding("utf8");
+
+    const onData = char => {
+      switch (char) {
+        case "\n":
+        case "\r":
+        case "\u0004":
+          stdin.setRawMode(false);
+          stdin.pause();
+          stdout.write("\n");
+          stdin.removeListener("data", onData);
+          resolve(password);
+          break;
+        case "\u0003": // Ctrl+C
+          process.exit();
+          break;
+        default:
+          stdout.write("*");
+          password += char;
+          break;
+      }
+    };
+
+    stdin.on("data", onData);
+  });
+}
+
 function ask(question) {
   return new Promise(resolve => rl.question(question, resolve));
 }
 
 async function changePassword() {
   try {
+<<<<<<< HEAD
     const siteKey = await ask("Enter site key: ");
     const newPassword = await ask("Enter new password: ");
     const username = "admin";
+=======
+    const username = await ask("Enter admin username: ");
+    const newPassword = await askHidden("Enter new password: ");
+>>>>>>> refs/remotes/origin/main
 
     const hash = await bcrypt.hash(newPassword, 12);
 
