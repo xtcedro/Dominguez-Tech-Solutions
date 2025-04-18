@@ -4,7 +4,6 @@ import {
   fetchAppointments,
   deleteAppointment,
 } from "../controllers/appointmentController.js";
-import { verifyAdminToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -20,9 +19,9 @@ router.get("/", (req, res, next) => {
   next();
 }, fetchAppointments);
 
-// Protected: Delete appointment (admin only)
-router.delete("/:id", verifyAdminToken, (req, res, next) => {
-  console.log("🗑️ Authenticated DELETE /api/appointments/:id with ID:", req.params.id);
+// Temporary: Unprotected delete route
+router.delete("/:id", (req, res, next) => {
+  console.log("🗑️ Incoming DELETE /api/appointments/:id with ID:", req.params.id);
   next();
 }, deleteAppointment);
 
