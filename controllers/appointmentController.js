@@ -47,27 +47,3 @@ export const fetchAppointments = async (req, res) => {
   }
 };
 
-// Delete appointment (site_key constraint is optional for multi-tenant security)
-export const deleteAppointment = async (req, res) => {
-  const { id } = req.params;
-
-  if (!id) {
-    return res.status(400).json({ error: "Appointment ID is required" });
-  }
-
-  try {
-    const [result] = await db.execute(
-      "DELETE FROM appointments WHERE id = ? AND site_key = ?",
-      [id, SITE_KEY]
-    );
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Appointment not found" });
-    }
-
-    res.status(200).json({ message: "Appointment deleted successfully" });
-  } catch (err) {
-    console.error("Error deleting appointment:", err);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
