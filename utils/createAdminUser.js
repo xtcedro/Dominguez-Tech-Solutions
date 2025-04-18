@@ -1,6 +1,7 @@
+// /cli/createAdminUser.js
 import readline from "readline";
 import bcrypt from "bcrypt";
-import mysql from "mysql2/promise";
+import { db } from "../config/db.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -9,10 +10,12 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+// Ask standard input
 function ask(question) {
   return new Promise(resolve => rl.question(question, resolve));
 }
 
+// Ask password input with masking and backspace support
 function askHidden(question) {
   return new Promise((resolve) => {
     process.stdout.write(question);
@@ -25,8 +28,8 @@ function askHidden(question) {
 
     stdin.on("data", function (char) {
       switch (char) {
-        case "\n":
         case "\r":
+        case "\n":
         case "\u0004":
           stdin.setRawMode(false);
           stdin.pause();
@@ -36,15 +39,25 @@ function askHidden(question) {
         case "\u0003": // Ctrl+C
           process.exit();
           break;
+        case "\u0008":
+        case "\u007F": // Backspace
+          if (password.length > 0) {
+            password = password.slice(0, -1);
+            process.stdout.clearLine(0);
+            process.stdout.cursorTo(0);
+            process.stdout.write(question + "*".repeat(password.length));
+          }
+          break;
         default:
-          process.stdout.write("*");
           password += char;
+          process.stdout.write("*");
           break;
       }
     });
   });
 }
 
+// Create admin user
 async function createAdmin() {
   try {
     const siteKey = await ask("Enter site key (e.g. domtech): ");
@@ -52,20 +65,12 @@ async function createAdmin() {
     const password = await askHidden("Enter admin password: ");
     const hash = await bcrypt.hash(password, 12);
 
-    const db = await mysql.createConnection({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-    });
-
     await db.execute(
       "INSERT INTO admin_users (site_key, username, password_hash) VALUES (?, ?, ?)",
       [siteKey, username, hash]
     );
 
-    console.log("\n✅ Admin created in MySQL.");
-    await db.end();
+    console.log("\n✅ Admin created successfully.");
   } catch (err) {
     console.error("\n❌ Error:", err.message);
   } finally {
