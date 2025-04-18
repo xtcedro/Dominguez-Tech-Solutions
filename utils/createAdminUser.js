@@ -9,48 +9,39 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-function ask(question, { hideInput = false } = {}) {
-  return new Promise(resolve => {
-    if (!hideInput) {
-      rl.question(question, resolve);
-    } else {
-      const stdin = process.stdin;
-      const onDataHandler = char => {
-        char = char + "";
-        switch (char) {
-          case "\n":
-          case "\r":
-          case "\u0004":
-            stdin.pause();
-            break;
-          default:
-            process.stdout.clearLine(0);
-            process.stdout.cursorTo(0);
-            process.stdout.write(question + "*".repeat(password.length));
-            password += char;
-            break;
-        }
-      };
+function ask(question) {
+  return new Promise(resolve => rl.question(question, resolve));
+}
 
-      let password = "";
-      process.stdout.write(question);
-      stdin.on("data", onDataHandler);
-      stdin.setRawMode(true);
-      stdin.resume();
+function askHidden(question) {
+  return new Promise((resolve) => {
+    process.stdout.write(question);
+    const stdin = process.stdin;
+    stdin.setRawMode(true);
+    stdin.resume();
+    stdin.setEncoding("utf8");
 
-      stdin.once("end", () => resolve(password));
-      stdin.once("keypress", () => {
-        stdin.setRawMode(false);
-        stdin.removeListener("data", onDataHandler);
-        resolve(password);
-      });
+    let password = "";
 
-      rl.once("line", () => {
-        stdin.setRawMode(false);
-        stdin.removeListener("data", onDataHandler);
-        resolve(password);
-      });
-    }
+    stdin.on("data", function (char) {
+      switch (char) {
+        case "\n":
+        case "\r":
+        case "\u0004":
+          stdin.setRawMode(false);
+          stdin.pause();
+          process.stdout.write("\n");
+          resolve(password);
+          break;
+        case "\u0003": // Ctrl+C
+          process.exit();
+          break;
+        default:
+          process.stdout.write("*");
+          password += char;
+          break;
+      }
+    });
   });
 }
 
@@ -58,15 +49,14 @@ async function createAdmin() {
   try {
     const siteKey = await ask("Enter site key (e.g. domtech): ");
     const username = await ask("Enter admin username: ");
-    const password = await ask("Enter admin password: ", { hideInput: true });
-    console.log(); // for newline
+    const password = await askHidden("Enter admin password: ");
     const hash = await bcrypt.hash(password, 12);
 
     const db = await mysql.createConnection({
-      host: process.env.ADMIN_DB_HOST,
-      user: process.env.ADMIN_DB_USER,
-      password: process.env.ADMIN_DB_PASSWORD,
-      database: process.env.ADMIN_DB_NAME,
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
     });
 
     await db.execute(
@@ -74,10 +64,10 @@ async function createAdmin() {
       [siteKey, username, hash]
     );
 
-    console.log("✅ Admin created in MySQL.");
+    console.log("\n✅ Admin created in MySQL.");
     await db.end();
   } catch (err) {
-    console.error("❌ Error:", err.message);
+    console.error("\n❌ Error:", err.message);
   } finally {
     rl.close();
   }
