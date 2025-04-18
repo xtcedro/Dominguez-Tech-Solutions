@@ -1,4 +1,4 @@
-import mysql from "mysql2/promise";
+import { db } from "../config/db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -9,13 +9,6 @@ export const adminLogin = async (req, res) => {
   console.log(`🔐 Attempting login for '${username}' on site '${siteKey}'`);
 
   try {
-    const db = await mysql.createConnection({
-      host: process.env.ADMIN_DB_HOST,
-      user: process.env.ADMIN_DB_USER,
-      password: process.env.ADMIN_DB_PASSWORD,
-      database: process.env.ADMIN_DB_NAME,
-    });
-
     const [rows] = await db.execute(
       "SELECT * FROM admin_users WHERE username = ? AND site_key = ?",
       [username, siteKey]
@@ -41,7 +34,6 @@ export const adminLogin = async (req, res) => {
     );
 
     console.log("✅ Login successful.");
-    await db.end();
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error("❌ Login Error:", error.message);
@@ -61,13 +53,6 @@ export const changeAdminPassword = async (req, res) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const { id: adminId, siteKey } = decoded;
-
-    const db = await mysql.createConnection({
-      host: process.env.ADMIN_DB_HOST,
-      user: process.env.ADMIN_DB_USER,
-      password: process.env.ADMIN_DB_PASSWORD,
-      database: process.env.ADMIN_DB_NAME,
-    });
 
     const [rows] = await db.execute(
       "SELECT * FROM admin_users WHERE id = ? AND site_key = ?",
@@ -91,7 +76,6 @@ export const changeAdminPassword = async (req, res) => {
       [hashedPassword, adminId, siteKey]
     );
 
-    await db.end();
     console.log("🔒 Password successfully updated.");
     res.status(200).json({ message: "Password changed successfully" });
   } catch (err) {
