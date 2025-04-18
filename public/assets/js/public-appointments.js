@@ -1,93 +1,71 @@
-const API_BASE_URL = window.location.origin.includes('localhost')
-  ? 'http://localhost:3000'
-  : 'https://www.domingueztechsolutions.com';
+// /assets/js/public-appointments.js
+
+const API_BASE = window.location.origin.includes("localhost")
+  ? "http://localhost:3000"
+  : "https://www.domingueztechsolutions.com";
+
+const SITE_KEY = "domtech"; // Or dynamically load this
 
 async function fetchAppointments() {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/appointments`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const res = await fetch(`${API_BASE}/api/appointments?site=${SITE_KEY}`);
+    const appointments = await res.json();
 
-    if (!response.ok) {
-      throw new Error(`HTTP Error! Status: ${response.status}`);
-    }
+    const container = document.getElementById("appointments-container");
+    container.innerHTML = "";
 
-    const appointments = await response.json();
-    const appointmentsContainer = document.getElementById('appointments-container');
-    appointmentsContainer.innerHTML = '';
-
-    if (appointments.length === 0) {
-      appointmentsContainer.innerHTML = '<p class="no-appointments">No appointments found. 📅</p>';
+    if (!appointments.length) {
+      container.innerHTML = "<p>No appointments found.</p>";
       return;
     }
 
-    appointments.forEach((appointment) => {
-      const appointmentCard = document.createElement('div');
-      appointmentCard.className = 'appointment-card';
-
-      const formattedDate = new Date(appointment.created_at).toLocaleString();
-
-      appointmentCard.innerHTML = `
-        <h3>👤 ${appointment.name}</h3>
-        <p><strong>📧 Email:</strong> ${appointment.email}</p>
-        <p><strong>📞 Phone:</strong> ${appointment.phone}</p>
-        <p><strong>📅 Booked On:</strong> ${formattedDate}</p>
-        <p><strong>🛠️ Service:</strong> ${appointment.service || 'Service not specified.'}</p>
-        <p><strong>💬 Details:</strong> ${appointment.message || 'No additional details provided.'}</p>
-        <button class="delete-btn" data-id="${appointment.id}">🗑️ Delete</button>
+    appointments.forEach((appt) => {
+      const card = document.createElement("div");
+      card.className = "appointment-card";
+      card.innerHTML = `
+        <h3>${appt.name}</h3>
+        <p><strong>Phone:</strong> ${appt.phone}</p>
+        <p><strong>Email:</strong> ${appt.email}</p>
+        <p><strong>Service:</strong> ${appt.service}</p>
+        <p><strong>Message:</strong> ${appt.message || "—"}</p>
+        <p><small>Submitted: ${new Date(appt.created_at).toLocaleString()}</small></p>
+        <button data-id="${appt.id}" class="delete-btn">🗑️ Delete</button>
       `;
 
-      appointmentsContainer.appendChild(appointmentCard);
-    });
-
-    document.querySelectorAll('.delete-btn').forEach((btn) => {
-      btn.addEventListener('click', async () => {
-        const id = btn.getAttribute('data-id');
-        await deleteAppointment(id);
+      card.querySelector(".delete-btn").addEventListener("click", () => {
+        if (confirm("Are you sure you want to delete this appointment?")) {
+          deleteAppointment(appt.id);
+        }
       });
-    });
 
-  } catch (error) {
-    const appointmentsContainer = document.getElementById('appointments-container');
-    appointmentsContainer.innerHTML = `<p class="error-message">Error fetching appointments: ${error.message}</p>`;
-    console.error('Error fetching appointments:', error);
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error("Error fetching appointments:", err);
+    document.getElementById("appointments-container").innerHTML =
+      "<p>Failed to load appointments.</p>";
   }
 }
 
 async function deleteAppointment(id) {
-  const messageBox = document.getElementById("appointmentMessage");
-
-  const confirmDelete = confirm("Are you sure you want to delete this appointment?");
-  if (!confirmDelete) return;
-
   try {
-    const token = localStorage.getItem("adminToken");
-    const res = await fetch(`${API_BASE_URL}/api/appointments/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
+    const res = await fetch(`${API_BASE}/api/appointments/${id}?site=${SITE_KEY}`, {
+      method: "DELETE",
     });
 
-    const data = await res.json();
+    const result = await res.json();
 
-    if (res.ok) {
-      messageBox.textContent = "✅ Appointment deleted successfully!";
-      messageBox.style.display = "block";
-      messageBox.style.color = "limegreen";
-      fetchAppointments();
-    } else {
-      messageBox.textContent = `❌ Failed to delete: ${data.error}`;
-      messageBox.style.display = "block";
-      messageBox.style.color = "orangered";
+    if (!res.ok) {
+      alert(result.error || "Error deleting appointment.");
+      return;
     }
+
+    alert("✅ Appointment deleted.");
+    fetchAppointments(); // Refresh list
   } catch (err) {
-    console.error('Delete Error:', err);
-    messageBox.textContent = "❌ Something went wrong while deleting the appointment.";
-    messageBox.style.display = "block";
-    messageBox.style.color = "orangered";
+    console.error("Delete error:", err);
+    alert("Error deleting appointment.");
   }
 }
 
+document.addEventListener("DOMContentLoaded", fetchAppointments);
