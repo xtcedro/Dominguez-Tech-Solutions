@@ -68,3 +68,10 @@ async function createAdmin() {
 
     console.log("\n✅ Admin created successfully.");
   } catch (err) {
+    console.error("\n❌ Error:", err.message);
+  } finally {
+    rl.close();
+  }
+}
+
+createAdmin();
