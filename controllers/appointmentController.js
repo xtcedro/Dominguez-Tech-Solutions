@@ -47,3 +47,41 @@ export const fetchAppointments = async (req, res) => {
   }
 };
 
+export const deleteAppointment = async (req, res) => {
+  const { id } = req.params;
+  const authHeader = req.headers.authorization;
+  const SITE_KEY = process.env.SITE_KEY;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "Unauthorized. No token provided." });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    jwt.verify(token, process.env.JWT_SECRET);
+  } catch (err) {
+    return res.status(403).json({ error: "Invalid or expired token." });
+  }
+
+  if (!id) {
+    return res.status(400).json({ error: "Appointment ID is required" });
+  }
+
+  try {
+    const [result] = await db.execute(
+      "DELETE FROM appointments WHERE id = ? AND site_key = ?",
+      [id, SITE_KEY]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Appointment not found" });
+    }
+
+    res.status(200).json({ message: "Appointment deleted successfully" });
+  } catch (err) {
+    console.error("❌ Error deleting appointment:", err.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
