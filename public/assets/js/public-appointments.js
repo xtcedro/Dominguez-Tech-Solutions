@@ -55,3 +55,39 @@ async function fetchAppointments() {
   }
 }
 
+async function deleteAppointment(id) {
+  const messageBox = document.getElementById("appointmentMessage");
+
+  const confirmDelete = confirm("Are you sure you want to delete this appointment?");
+  if (!confirmDelete) return;
+
+  try {
+    const token = localStorage.getItem("adminToken");
+    const res = await fetch(`${API_BASE_URL}/api/appointments/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      messageBox.textContent = "✅ Appointment deleted successfully!";
+      messageBox.style.display = "block";
+      messageBox.style.color = "limegreen";
+      fetchAppointments();
+    } else {
+      messageBox.textContent = `❌ Failed to delete: ${data.error}`;
+      messageBox.style.display = "block";
+      messageBox.style.color = "orangered";
+    }
+  } catch (err) {
+    console.error('Delete Error:', err);
+    messageBox.textContent = "❌ Something went wrong while deleting the appointment.";
+    messageBox.style.display = "block";
+    messageBox.style.color = "orangered";
+  }
+}
+
