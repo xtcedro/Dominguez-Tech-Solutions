@@ -2,27 +2,28 @@ import express from "express";
 import {
   submitAppointment,
   fetchAppointments,
-  deleteAppointment
+  deleteAppointment,
 } from "../controllers/appointmentController.js";
 import { verifyAdminToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Log for incoming appointment submission
+// Public: Submit appointment
 router.post("/", (req, res, next) => {
-  console.log("Incoming POST /api/appointments");
+  console.log("📬 Incoming POST /api/appointments");
   next();
 }, submitAppointment);
 
-// Log for fetching appointments
+// Public: Fetch appointments
 router.get("/", (req, res, next) => {
-  console.log("Incoming GET /api/appointments");
+  console.log("📥 Incoming GET /api/appointments");
   next();
 }, fetchAppointments);
 
-router.delete("/:id", (req, res, next) => {
-  console.log("Incoming DELETE /api/appointments/:id with ID:", req.params.id);
+// Protected: Delete appointment (admin only)
+router.delete("/:id", verifyAdminToken, (req, res, next) => {
+  console.log("🗑️ Authenticated DELETE /api/appointments/:id with ID:", req.params.id);
   next();
-}, verifyAdminToken, deleteAppointment);
+}, deleteAppointment);
 
 export default router;
