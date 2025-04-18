@@ -15,7 +15,7 @@ function ask(question) {
   return new Promise(resolve => rl.question(question, resolve));
 }
 
-// Ask password input with masking and backspace support
+// Ask hidden input without displaying characters at all
 function askHidden(question) {
   return new Promise((resolve) => {
     process.stdout.write(question);
@@ -43,14 +43,10 @@ function askHidden(question) {
         case "\u007F": // Backspace
           if (password.length > 0) {
             password = password.slice(0, -1);
-            process.stdout.clearLine(0);
-            process.stdout.cursorTo(0);
-            process.stdout.write(question + "*".repeat(password.length));
           }
           break;
         default:
           password += char;
-          process.stdout.write("*");
           break;
       }
     });
@@ -72,10 +68,3 @@ async function createAdmin() {
 
     console.log("\n✅ Admin created successfully.");
   } catch (err) {
-    console.error("\n❌ Error:", err.message);
-  } finally {
-    rl.close();
-  }
-}
-
-createAdmin();
