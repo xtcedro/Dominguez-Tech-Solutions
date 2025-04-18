@@ -4,7 +4,7 @@ import mysql from "mysql2/promise";
 
 dotenv.config();
 
-// ✅ Main Application DB (Appointments, etc.)
+// ✅ NodeGenesis Universal Database
 export const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -15,28 +15,16 @@ export const db = mysql.createPool({
   queueLimit: 0,
 });
 
-// ✅ Admin Authentication DB
-export const adminDB = mysql.createPool({
-  host: process.env.ADMIN_DB_HOST,
-  user: process.env.ADMIN_DB_USER,
-  password: process.env.ADMIN_DB_PASSWORD,
-  database: process.env.ADMIN_DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 5,
-  queueLimit: 0,
-});
-
-// ✅ Test Connections
+// ✅ Test Connection
 (async () => {
   try {
-    const [conn1, conn2] = await Promise.all([
-      db.getConnection(),
-      adminDB.getConnection(),
-    ]);
-    console.log("✅ Main DB connected.");
-    console.log("✅ Admin DB connected.");
-    conn1.release();
-    conn2.release();
+    const conn = await db.getConnection();
+    console.log("✨===========================================✨");
+    console.log("✅ NodeGenesis Universal Database Connected");
+    console.log("✨ Database: " + process.env.DB_NAME);
+    console.log("✨ Host: " + process.env.DB_HOST);
+    console.log("✨===========================================✨");
+    conn.release();
   } catch (err) {
     console.error("❌ Database connection error:", err.message);
     process.exit(1);
