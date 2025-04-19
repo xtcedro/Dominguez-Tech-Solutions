@@ -1,14 +1,10 @@
-// assets/js/analytics.js
+import { API_BASE } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", fetchSiteAnalytics);
 
 async function fetchSiteAnalytics() {
-  const API_BASE_URL = window.location.origin.includes("localhost")
-    ? "http://localhost:3000"
-    : "https://www.domingueztechsolutions.com";
-
   try {
-    const response = await fetch(`${API_BASE_URL}/api/analytics`, {
+    const response = await fetch(`${API_BASE}/api/analytics`, {
       headers: { "Content-Type": "application/json" }
     });
 
@@ -22,7 +18,6 @@ async function fetchSiteAnalytics() {
     document.getElementById("total-appointments").textContent = data.totalAppointments ?? "0";
     document.getElementById("total-blogs").textContent = data.totalBlogs ?? "0";
     document.getElementById("total-messages").textContent = data.totalMessages ?? "0";
-    document.getElementById("total-transactions").textContent = data.totalTransactions ?? "0";
 
     // Populate logs if available
     const logsContainer = document.getElementById("activity-logs");
@@ -44,8 +39,7 @@ async function fetchSiteAnalytics() {
     document.getElementById("total-appointments").textContent = "❌";
     document.getElementById("total-blogs").textContent = "❌";
     document.getElementById("total-messages").textContent = "❌";
-    document.getElementById("total-transactions").textContent = "❌";
-    
+
     const logsContainer = document.getElementById("activity-logs");
     logsContainer.innerHTML = `<li class="error">❌ Failed to load analytics: ${err.message}</li>`;
   }
