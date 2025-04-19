@@ -4,6 +4,7 @@ import {
   fetchAppointments,
   deleteAppointment,
 } from "../controllers/appointmentController.js";
+import { verifyAdminToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -18,8 +19,6 @@ router.get("/", (req, res, next) => {
   console.log("📥 Incoming GET /api/appointments");
   next();
 }, fetchAppointments);
-
-import { verifyAdminToken } from "../middleware/authMiddleware.js";
 
 router.delete(
   "/:id",
