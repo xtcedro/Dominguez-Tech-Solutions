@@ -19,5 +19,17 @@ router.get("/", (req, res, next) => {
   next();
 }, fetchAppointments);
 
+import { verifyAdminToken } from "../middleware/authMiddleware.js";
+
+router.delete(
+  "/:id",
+  verifyAdminToken,
+  (req, res, next) => {
+    console.log("🗑️ Authenticated DELETE /api/appointments/:id with ID:", req.params.id);
+    next();
+  },
+  deleteAppointment
+);
+
 
 export default router;
