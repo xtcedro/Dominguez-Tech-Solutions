@@ -47,25 +47,3 @@ async function fetchAppointments() {
   }
 }
 
-async function deleteAppointment(id) {
-  try {
-    const res = await fetch(`${API_BASE}/api/appointments/${id}?site=${SITE_KEY}`, {
-      method: "DELETE",
-    });
-
-    const result = await res.json();
-
-    if (!res.ok) {
-      alert(result.error || "Error deleting appointment.");
-      return;
-    }
-
-    alert("✅ Appointment deleted.");
-    fetchAppointments(); // Refresh list
-  } catch (err) {
-    console.error("Delete error:", err);
-    alert("Error deleting appointment.");
-  }
-}
-
-document.addEventListener("DOMContentLoaded", fetchAppointments);
