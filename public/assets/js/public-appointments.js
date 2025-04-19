@@ -4,7 +4,19 @@ const API_BASE = window.location.origin.includes("localhost")
   ? "http://localhost:3000"
   : "https://www.domingueztechsolutions.com";
 
-const SITE_KEY = "domtech"; // Adjust if needed per deployment
+const SITE_KEY = "domtech"; // Adjust this if needed
+
+function showResponse(message, success = true) {
+  const msgBox = document.getElementById("response-message");
+  msgBox.textContent = message;
+  msgBox.style.color = success ? "#10b981" : "#ef4444"; // green or red
+  msgBox.style.fontWeight = "600";
+  msgBox.style.marginBottom = "1rem";
+
+  setTimeout(() => {
+    msgBox.textContent = "";
+  }, 4000);
+}
 
 async function fetchAppointments() {
   try {
@@ -31,16 +43,13 @@ async function fetchAppointments() {
         <p><small>Submitted: ${new Date(appt.created_at).toLocaleString()}</small></p>
       `;
 
-      // Show delete button if admin token is present
       const token = localStorage.getItem("adminToken");
       if (token) {
         const deleteBtn = document.createElement("button");
         deleteBtn.className = "delete-btn";
         deleteBtn.textContent = "🗑️ Delete";
         deleteBtn.addEventListener("click", () => {
-          if (confirm("Are you sure you want to delete this appointment?")) {
-            deleteAppointment(appt.id, token);
-          }
+          deleteAppointment(appt.id, token);
         });
         card.appendChild(deleteBtn);
       }
@@ -51,6 +60,7 @@ async function fetchAppointments() {
     console.error("❌ Error fetching appointments:", err);
     document.getElementById("appointments-container").innerHTML =
       "<p>Failed to load appointments.</p>";
+    showResponse("Error loading appointments", false);
   }
 }
 
@@ -67,15 +77,15 @@ async function deleteAppointment(id, token) {
     const result = await res.json();
 
     if (!res.ok) {
-      alert(result.error || "Error deleting appointment.");
+      showResponse(result.error || "Error deleting appointment.", false);
       return;
     }
 
-    alert("✅ Appointment deleted.");
+    showResponse("✅ Appointment deleted successfully.");
     fetchAppointments(); // Refresh list
   } catch (err) {
     console.error("❌ Delete error:", err);
-    alert("Error deleting appointment.");
+    showResponse("Error deleting appointment.", false);
   }
 }
 
