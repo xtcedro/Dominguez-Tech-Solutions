@@ -1,15 +1,8 @@
-// controllers/contactController.js
-import mysql from "mysql2/promise";
+import { db } from "../config/db.js";
 import dotenv from "dotenv";
-
 dotenv.config();
 
-const dbConfig = {
-  host: process.env.ADMIN_DB_HOST,
-  user: process.env.ADMIN_DB_USER,
-  password: process.env.ADMIN_DB_PASSWORD,
-  database: process.env.ADMIN_DB_NAME,
-};
+const SITE_KEY = process.env.SITE_KEY;
 
 export const submitContactMessage = async (req, res) => {
   const { name, email, phone, message } = req.body;
@@ -19,34 +12,27 @@ export const submitContactMessage = async (req, res) => {
   }
 
   try {
-    const db = await mysql.createConnection(dbConfig);
     await db.execute(
-      `INSERT INTO contact_messages (name, email, phone, message, submitted_at)
-       VALUES (?, ?, ?, ?, NOW())`,
-      [name, email, phone || null, message]
+      `INSERT INTO contact_messages (site_key, name, email, phone, message, submitted_at)
+       VALUES (?, ?, ?, ?, ?, NOW())`,
+      [SITE_KEY, name, email, phone || null, message]
     );
-    await db.end();
 
     res.status(200).json({ message: "Message submitted successfully." });
   } catch (error) {
-    console.error("Error submitting contact message:", error.message);
+    console.error("❌ Error submitting contact message:", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
 
 export const fetchContactMessages = async (req, res) => {
   try {
-    const db = await mysql.createConnection(dbConfig);
-
-    // Check if created_at column exists
-    const [columns] = await db.execute("SHOW COLUMNS FROM contact_messages LIKE 'created_at'");
-    const orderBy = columns.length > 0 ? "created_at" : "id";
-
     const [messages] = await db.execute(
-      `SELECT * FROM contact_messages ORDER BY ${orderBy} DESC`
+      `SELECT * FROM contact_messages 
+       WHERE site_key = ? 
+       ORDER BY submitted_at DESC`,
+      [SITE_KEY]
     );
-
-    await db.end();
 
     console.log(`📦 Retrieved ${messages.length} contact messages.`);
     res.status(200).json(messages);
@@ -56,3 +42,26 @@ export const fetchContactMessages = async (req, res) => {
   }
 };
 
+export const deleteContactMessage = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: "Contact message ID is required." });
+  }
+
+  try {
+    const [result] = await db.execute(
+      `DELETE FROM contact_messages WHERE id = ? AND site_key = ?`,
+      [id, SITE_KEY]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Message not found." });
+    }
+
+    res.status(200).json({ message: "Contact message deleted successfully." });
+  } catch (error) {
+    console.error("❌ Error deleting contact message:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
