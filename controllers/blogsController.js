@@ -1,24 +1,18 @@
-import mysql from "mysql2/promise";
+import { db } from "../config/db.js";
 import dotenv from "dotenv";
-
 dotenv.config();
 
-const dbConfig = {
-  host: process.env.ADMIN_DB_HOST,
-  user: process.env.ADMIN_DB_USER,
-  password: process.env.ADMIN_DB_PASSWORD,
-  database: process.env.ADMIN_DB_NAME,
-};
+const SITE_KEY = process.env.SITE_KEY;
 
 // GET all blog posts
 export const getAllBlogs = async (req, res) => {
   console.log("📥 GET /api/blogs hit");
 
   try {
-    const db = await mysql.createConnection(dbConfig);
-    const [rows] = await db.execute("SELECT * FROM blogs ORDER BY created_at DESC");
-    await db.end();
-
+    const [rows] = await db.execute(
+      "SELECT * FROM blogs WHERE site_key = ? ORDER BY created_at DESC",
+      [SITE_KEY]
+    );
     res.status(200).json(rows);
   } catch (err) {
     console.error("❌ Error fetching blogs:", err.message);
@@ -38,13 +32,11 @@ export const createBlogPost = async (req, res) => {
   }
 
   try {
-    const db = await mysql.createConnection(dbConfig);
     await db.execute(
-      `INSERT INTO blogs (title, author, summary, content) VALUES (?, ?, ?, ?)`,
-      [title, author, summary, content]
+      `INSERT INTO blogs (site_key, title, author, summary, content) 
+       VALUES (?, ?, ?, ?, ?)`,
+      [SITE_KEY, title, author, summary, content]
     );
-    await db.end();
-
     res.status(201).json({ message: "Blog post created successfully" });
   } catch (err) {
     console.error("❌ Error creating blog post:", err.message);
@@ -63,13 +55,12 @@ export const updateBlogPost = async (req, res) => {
   }
 
   try {
-    const db = await mysql.createConnection(dbConfig);
     const [result] = await db.execute(
-      `UPDATE blogs SET title = ?, author = ?, summary = ?, content = ?, updated_at = NOW()
-       WHERE id = ?`,
-      [title, author, summary, content, blogId]
+      `UPDATE blogs 
+       SET title = ?, author = ?, summary = ?, content = ?, updated_at = NOW() 
+       WHERE id = ? AND site_key = ?`,
+      [title, author, summary, content, blogId, SITE_KEY]
     );
-    await db.end();
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "Blog post not found" });
