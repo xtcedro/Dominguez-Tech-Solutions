@@ -1,15 +1,13 @@
 import { db } from "../config/db.js";
-import Stripe from "stripe";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const SITE_KEY = process.env.SITE_KEY;
 
 /**
  * GET /api/analytics
- * Returns dashboard statistics for appointments, blogs, messages, and transactions
+ * Returns dashboard statistics for appointments, blogs, and contact messages
  */
 export const getSiteAnalytics = async (req, res) => {
   console.log("📈 GET /api/analytics hit");
@@ -30,14 +28,10 @@ export const getSiteAnalytics = async (req, res) => {
       [SITE_KEY]
     );
 
-    const payments = await stripe.paymentIntents.list({ limit: 100 });
-    const totalTransactions = payments.data.length;
-
     res.status(200).json({
       totalAppointments,
       totalBlogs,
-      totalMessages,
-      totalTransactions,
+      totalMessages
     });
   } catch (error) {
     console.error("❌ Analytics error:", error.message);
