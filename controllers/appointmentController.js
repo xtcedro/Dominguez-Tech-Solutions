@@ -1,5 +1,6 @@
 import { db } from "../config/db.js";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 dotenv.config();
 
 const SITE_KEY = process.env.SITE_KEY;
@@ -27,12 +28,12 @@ export const submitAppointment = async (req, res) => {
       appointmentId: result.insertId,
     });
   } catch (error) {
-    console.error("Error submitting appointment:", error);
+    console.error("❌ Error submitting appointment:", error.message);
     res.status(500).json({ error: "Failed to submit appointment" });
   }
 };
 
-// Fetch all appointments (filter by site_key)
+// Fetch all appointments (filtered by site_key)
 export const fetchAppointments = async (req, res) => {
   try {
     const [appointments] = await db.execute(
@@ -42,15 +43,15 @@ export const fetchAppointments = async (req, res) => {
 
     res.json(appointments);
   } catch (error) {
-    console.error("Error fetching appointments:", error);
+    console.error("❌ Error fetching appointments:", error.message);
     res.status(500).json({ error: "Failed to fetch appointments" });
   }
 };
 
+// Delete appointment (admin only)
 export const deleteAppointment = async (req, res) => {
   const { id } = req.params;
   const authHeader = req.headers.authorization;
-  const SITE_KEY = process.env.SITE_KEY;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ error: "Unauthorized. No token provided." });
@@ -84,4 +85,3 @@ export const deleteAppointment = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
