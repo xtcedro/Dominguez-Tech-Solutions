@@ -47,3 +47,34 @@ async function fetchAppointments() {
   }
 }
 
+async function deleteAppointment(id) {
+  const token = localStorage.getItem("adminToken");
+
+  if (!token) {
+    alert("Unauthorized: Please log in to delete appointments.");
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/api/appointments/${id}?site=${SITE_KEY}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    const result = await res.json();
+
+    if (!res.ok) {
+      alert(result.error || "Error deleting appointment.");
+      return;
+    }
+
+    alert("✅ Appointment deleted.");
+    fetchAppointments(); // Refresh list
+  } catch (err) {
+    console.error("Delete error:", err);
+    alert("Error deleting appointment.");
+  }
+}
